@@ -1,7 +1,10 @@
 package model.listRepresentation;
-
 import model.Node;
 
-public class WeightedList {
+
+public class ListAdjancet {
+
+	
+	
 
 }
