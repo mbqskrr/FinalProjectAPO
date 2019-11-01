@@ -1,4 +1,4 @@
-package graphAlgoritms;
+package model.graphAlgoritms;
 
 public class FloydWarshall {
 

@@ -1,4 +1,4 @@
-package ListRepresentation;
+package model.listRepresentation;
 
 public class MatixRepresentation {
 
