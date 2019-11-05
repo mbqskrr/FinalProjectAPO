@@ -1,6 +1,6 @@
 package model.listRepresentation;
-import model.Node;
 
+//import model.Node;
 
 public class ListAdjancet {
 

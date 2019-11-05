@@ -1,12 +1,12 @@
 package model.graphAlgoritms;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 import model.Node;
+
 /**
- * 
+ * BFS algorithm with neighbours list
  * @author W-7
  *
  * @param <T>

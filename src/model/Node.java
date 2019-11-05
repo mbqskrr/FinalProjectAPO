@@ -50,4 +50,13 @@ public class Node<T> {
 	public boolean isVistied() {
 		return vistied;
 	}
+
+	public T getContent() {
+		return content;
+	}
+
+	public void setContent(T content) {
+		this.content = content;
+	}
+	
 }
