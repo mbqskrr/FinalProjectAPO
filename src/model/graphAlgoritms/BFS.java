@@ -7,7 +7,8 @@ import model.Node;
 
 /**
  * BFS algorithm with neighbours list
- * @author W-7
+ * @author Manuel Balanta
+ * Universidad ICESI
  *
  * @param <T>
  */

@@ -4,8 +4,8 @@ import model.matrixRepresentation.WeightMatrix;
 
 /**
  * Class that implement FloydWarshall algorithm
- * @author W-7
- *
+ * @author Manuel Balanta
+ *Universidad ICESI
  */
 public class FloydWarshall {
 	public int[][] pathMatrix;
@@ -28,7 +28,7 @@ public class FloydWarshall {
 	/**
 	 * Implementation of FloydWarshall algorithm
 	 * @param weightsMatrix
-	 * @return the minima paths between every vertex
+	 * @return the minimum paths between every vertex
 	 */
 	public int[][] minimaPaths(int[][] weightsMatrix) {
 		for (int i = 0; i < weightsMatrix.length; i++) {

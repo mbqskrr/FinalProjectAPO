@@ -7,7 +7,8 @@ import model.Node;
 
 /**
  * DFS algorithm with neighbours list 
- * @author W-7
+ * @author Manuel Balanta
+ * Universidad ICESI
  *
  */
 public class DFS <T>{
