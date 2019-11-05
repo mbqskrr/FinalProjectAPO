@@ -1,14 +1,26 @@
 package model.matrixRepresentation;
 
+/**
+ * 
+ * @author W-7
+ *
+ */
 public class WeightMatrix {
 	private int[][] matrix;
 	private int capacity;
 	
+	/**
+	 * Principal contructor
+	 * @param capacity number of vertices
+	 */
 	public WeightMatrix(int capacity) {
 		this.capacity = capacity;
 		matrix = new int [capacity][capacity];
 	}
 	
+	/**
+	 * Empty constructor
+	 */
 	public WeightMatrix() {
 		
 	}
