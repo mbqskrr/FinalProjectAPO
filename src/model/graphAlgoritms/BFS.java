@@ -12,14 +12,13 @@ import model.Node;
  * @param <T>
  */
 public class BFS <T>{
-	private Queue<Node> q;
-	private ArrayList<Node> nodes = new ArrayList<Node>();
+	private Queue<Node<T>> q;
 	
 	/**
 	 * 
 	 */
 	public BFS() {
-		q = new LinkedList<Node>();
+		q = new LinkedList<Node<T>>();
 	}
 	
 	/**
@@ -30,10 +29,11 @@ public class BFS <T>{
 		q.offer(node);
 		node.setVistied(true);
 		while (!q.isEmpty()) {
-			Node element = q.poll();
-			List<T> neigbours = element.getNeighbours();
-			for (int i = 0; i < neigbours.size(); i++) {
-				Node n = (Node) neigbours.get(i);
+			Node<T> element = q.poll();
+			List<T> neighbours = element.getNeighbours();
+			for (int i = 0; i < neighbours.size(); i++) {
+				@SuppressWarnings("unchecked")
+				Node<T> n = (Node<T>) neighbours.get(i);
 				if (n != null && !n.isVistied()) {
 					q.offer(n);
 					n.setVistied(true);
