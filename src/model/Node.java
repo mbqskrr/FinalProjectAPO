@@ -15,13 +15,22 @@ public class Node<T> {
 	 * This represent the content of the node
 	 */
 	private T content;
+	private boolean vistied;
 	private List<T> neighbours;
 	
+	/**
+	 * 
+	 * @param data
+	 */
 	public Node(T data){
 		content = data;
 		neighbours = new ArrayList<T>();
 	}
 	
+	/**
+	 * 
+	 * @param neighbourNode
+	 */
 	public void addNeighbours(T neighbourNode) {
 		this.neighbours.add(neighbourNode);
 	}
@@ -34,4 +43,11 @@ public class Node<T> {
 		this.neighbours = neighbours;
 	}
 
+	public void setVistied(boolean vistied) {
+		this.vistied = vistied;
+	}
+
+	public boolean isVistied() {
+		return vistied;
+	}
 }
