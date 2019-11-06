@@ -10,10 +10,10 @@ import model.matrixRepresentation.WeightMatrix;
  */
 public class Dijkstra<T> {
 	private int[][] weights;
-	private int[] last; // último vértice en el camino
-	private int[] cost; // coste mínimo
+	private int[] last; // last vertex on the path
+	private int[] cost; // minims cost
 	private boolean[] F;
-	private int n; //numero de vertices
+	private int n; //number og vertices
 	private int origin;
 	
 	/**

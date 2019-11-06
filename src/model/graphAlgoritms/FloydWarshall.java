@@ -5,7 +5,7 @@ import model.matrixRepresentation.WeightMatrix;
 /**
  * Class that implement FloydWarshall algorithm
  * @author Manuel Balanta
- *Universidad ICESI
+ * Universidad ICESI
  */
 public class FloydWarshall {
 	public int[][] pathMatrix;
