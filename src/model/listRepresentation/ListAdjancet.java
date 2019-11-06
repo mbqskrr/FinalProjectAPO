@@ -6,12 +6,26 @@ import model.Node;
 
 public class ListAdjancet {
 
-	private LinkedList<Node<T>> ll;
+	private LinkedList[] ll;
 	
-	public ListAdjancet() {
-		ll = new LinkedList<Node>();
+	private int vertex;
+	
+	public ListAdjancet(int n) {
+		n = vertex;
+		ll = new LinkedList[vertex];
 		
 	}
+	
+	public boolean setList(int j) {
+		boolean setted = false;
+		
+		
+		
+		return setted;
+	}
+	
+	
+	
 	
 
 }
