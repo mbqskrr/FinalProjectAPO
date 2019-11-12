@@ -2,12 +2,17 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.PriorityQueue;
+
 import collections.ICollection;
 import model.IGraph;
 
 public class GraphAlgorithms<T> {
 	
-	
+	private List<Node<T>>[] path;
+	private int[] cost;
+	private boolean[] F;
+	private List<Node<T>>[][] pathMatrix;
 	
 	/**
 	 * Performs a breadth-first search to traverse a graph
@@ -64,4 +69,83 @@ public class GraphAlgorithms<T> {
 		}
 		return trav;
 	}
+	
+	/**
+	 * minimum path given a vertex of origin towards all others
+	 * @param origin
+	 * @param weights
+	 * @param g
+	 */
+	public void dijkstra(Node<T> origin, double[][] weights, IGraph<T> g) {
+		int n = weights.length;
+		for (int i = 0; i < n; i++) {
+			F[i] = false;
+			cost[i] = (int) weights[origin.getPointer()][i];
+			path[i].add(origin);
+		}
+		F[origin.getPointer()] = true;
+		cost[origin.getPointer()] = 0;
+		int v = minimun(weights);
+		F[v] = true;
+		//update distance of unmarked vertices
+		for (int i = 1; i < n; i++) {
+			if(!F[i]) {
+				if (cost[v] + weights[v][i] < cost[i]) {
+					cost[i] = (int) (cost[v] + weights[v][i]);
+					Node<T> nodeV = g.search(v);
+					path[i].add(nodeV);
+				}
+			}
+		}
+	}
+	
+	/**
+	 * select unmarked vertex shorter distance
+	 * @return v
+	 */
+	private int minimun(double[][] weights) {
+		int n = weights.length;
+		int max = Integer.MAX_VALUE;
+		int v = 1;
+		for (int i = 1; i < n; i++) {
+			if (!F[i] && (cost[i] <= max)) {
+				max = cost[i];
+				v = i;
+			}
+		}
+		return v;
+	}
+	
+	/**
+	 * Implementation of FloydWarshall algorithm
+	 * @param weightsMatrix
+	 * @return the minimum paths between every vertex
+	 */
+	public double[][] minimaPaths(double[][] weightsMatrix, IGraph<T> g) {
+		for (int i = 0; i < weightsMatrix.length; i++) {
+			for (int j = 0; j < weightsMatrix.length; j++) {
+				for (int k = 0; k < weightsMatrix.length; k++) {
+					if (weightsMatrix[j][i] + weightsMatrix[i][k] < weightsMatrix[j][k]) {
+						weightsMatrix[j][k] = weightsMatrix[j][i] + weightsMatrix[i][k];
+						Node<T> nodeI = g.search(i);
+						pathMatrix[j][k].add(nodeI);
+					}
+				}
+			}
+		}
+		return weightsMatrix;
+	}
+	
+	public List<Node<T>> prim(Node<T> node){
+		return null;
+	}
+	
+	public List<Node<T>> kruskal(PriorityQueue<Double> sortedEdges){
+		return null;
+	}
+
+	public List<Node<T>>[][] getPathMatrix() {
+		return pathMatrix;
+	}
+	
 }

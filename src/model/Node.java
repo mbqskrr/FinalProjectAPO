@@ -37,5 +37,6 @@ public class Node<T> {
 	public void setPointer(int pointer) {
 		this.pointer = pointer;
 	}
+
 	
 }

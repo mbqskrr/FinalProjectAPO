@@ -82,4 +82,8 @@ public interface IGraph<T> {
 	@SuppressWarnings("rawtypes")
 	public int getIndex(Node vertex);
 	
+	public Node<T> search(Node<T> A);
+	
+	public Node<T> search(int pointer);
+	
 }
