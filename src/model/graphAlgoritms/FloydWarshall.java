@@ -1,6 +1,5 @@
 package model.graphAlgoritms;
 
-import model.matrixRepresentation.WeightMatrix;
 
 /**
  * Class that implement FloydWarshall algorithm
@@ -14,8 +13,8 @@ public class FloydWarshall {
 	 * Constructor that initialize the path matrix
 	 * @param wm weights matrix
 	 */
-	public FloydWarshall(WeightMatrix wm) {
-		pathMatrix = new int [wm.getCapacity()][wm.getCapacity()];
+	public FloydWarshall(int wm) {
+		pathMatrix = new int [wm][wm];
 	}
 	
 	/**

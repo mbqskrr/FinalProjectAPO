@@ -51,7 +51,8 @@ public interface IGraph<T> {
 	 * @param node The vertex to be consulted its adjacent vertices
 	 * @return A list with all the adjacent vertices of node
 	 */
-	public List<Node<T>> vertexAdjacent(Node<T> node);
+	@SuppressWarnings("rawtypes")
+	public List<T> vertexAdjacent(Node node);
 	
 	/**
 	 * Check if A and B are connected
@@ -74,7 +75,11 @@ public interface IGraph<T> {
 	 */
 	public boolean isDirected();
 	
-	public int getIndex(Node<T> node);
-	
 	public int getVertexSize();
+	
+	public boolean isWeighted();
+
+	@SuppressWarnings("rawtypes")
+	public int getIndex(Node vertex);
+	
 }

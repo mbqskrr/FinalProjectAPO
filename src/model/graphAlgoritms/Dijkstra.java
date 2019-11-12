@@ -1,7 +1,5 @@
 package model.graphAlgoritms;
 
-import model.matrixRepresentation.WeightMatrix;
-
 /**
  * Class that implement Dijkstra algorithm
  * @author W-7
@@ -11,20 +9,20 @@ import model.matrixRepresentation.WeightMatrix;
 public class Dijkstra<T> {
 	private int[][] weights;
 	private int[] last; // last vertex on the path
-	private int[] cost; // minims cost
+	private int[] cost; // minimal cost
 	private boolean[] F;
-	private int n; //number og vertices
+	private int n; //number of vertices
 	private int origin;
 	
 	/**
 	 * Constructor method
-	 * @param wm weghts matrix
+	 * @param wm weights matrix
 	 * @param o origin vertex
 	 */
-	public Dijkstra(WeightMatrix wm, int o) {
-		n = wm.getCapacity();
+	public Dijkstra(int o) {
+		
 		origin = o;
-		weights = wm.getMatrix(); 
+		
 		last = new int[n];
 		cost = new int[n];
 		F = new boolean[n];
