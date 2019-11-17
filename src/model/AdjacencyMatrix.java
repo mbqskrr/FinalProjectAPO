@@ -176,8 +176,6 @@ public class AdjacencyMatrix<T> implements IGraph<T>{
 		return false;
 	}
 
-	@SuppressWarnings("rawtypes")
-	@Override
 	public int getIndex(T vertex) {
 		// TODO Auto-generated method stub
 		return 0;

@@ -1,18 +1,14 @@
-package model;
+package collections;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-class NodeTest {
+class StackTest {
 
-	@BeforeAll
-	
-	
 	@Test
 	void test() {
-		fail();
+		fail("Not yet implemented");
 	}
 
 }

@@ -85,7 +85,6 @@ public class GraphAlgorithms<T> {
 			if(!F[i]) {
 				if (cost[v] + weights[v][i] < cost[i]) {
 					cost[i] = (int) (cost[v] + weights[v][i]);
-					T nodeV = g.search(v);
 				}
 			}
 		}

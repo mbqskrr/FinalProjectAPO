@@ -1,10 +1,10 @@
-package model.matrixRepresentation;
+package collections;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-class WeightMatrixTest {
+class QueueTest {
 
 	@Test
 	void test() {
