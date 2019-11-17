@@ -41,12 +41,12 @@ public class AdjacencyMatrix<T> implements IGraph<T>{
     /**
      * A Map that accesses any vertex in the graph through its index in the matrix.
      */
-    private Map<Integer, Node<T>> vertices;
+    private Map<Integer, T> vertices;
 
     /**
      * A Map that uses any vertex as a key to access its corresponding index in the matrix.
      */
-    private Map<Node<T>, Integer> verticesIndices;
+    private Map<T, Integer> verticesIndices;
 
     /**
      * A Set that contains ordered non-duplicate Integers of empty row/columns in the matrix whose values are lesser
@@ -111,44 +111,43 @@ public class AdjacencyMatrix<T> implements IGraph<T>{
     }
 
 	@Override
-	public boolean addVertex(Node<T> node) {
+	public boolean addVertex(T node) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public void addEdge(Node<T> A, Node<T> B) {
+	public void addEdge(T A, T B) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void addEdge(Node<T> A, Node<T> B, double l) {
+	public void addEdge(T A, T B, double l) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public boolean removeVertex(Node<T> node) {
+	public boolean removeVertex(T node) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public void removeEdge(Node<T> A, Node<T> B) {
+	public void removeEdge(T A, T B) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@SuppressWarnings("rawtypes")
 	@Override
-	public List<T> vertexAdjacent(Node node) {
+	public List<T> vertexAdjacent(T node) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public boolean areConnected(Node<T> A, Node<T> B) {
+	public boolean areConnected(T A, T B) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -179,19 +178,19 @@ public class AdjacencyMatrix<T> implements IGraph<T>{
 
 	@SuppressWarnings("rawtypes")
 	@Override
-	public int getIndex(Node vertex) {
+	public int getIndex(T vertex) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public Node<T> search(Node<T> A) {
+	public T search(T A) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Node<T> search(int pointer) {
+	public T search(int index) {
 		// TODO Auto-generated method stub
 		return null;
 	}

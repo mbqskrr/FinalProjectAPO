@@ -9,7 +9,7 @@ public interface IGraph<T> {
 	 * @param node The new vertex to be added
 	 * @return True if was added and false if it was already in the graph
 	 */
-	public boolean addVertex(Node<T> node);
+	public boolean addVertex(T node);
 	
 	/**
 	 * Adds an edge to the graph
@@ -18,7 +18,7 @@ public interface IGraph<T> {
 	 * @param A a vertex within the graph
 	 * @param B a vertex within the graph
 	 */
-	public void addEdge(Node<T> A, Node<T> B);
+	public void addEdge(T A, T B);
 	
 	/**
 	 * Adds a weighted edge to the graph
@@ -28,14 +28,14 @@ public interface IGraph<T> {
 	 * @param B a vertex within the graph
 	 * @param l	is the weight of the edge
 	 */
-	public void addEdge(Node<T> A, Node<T> B, double l);
+	public void addEdge(T A, T B, double l);
 	
 	/**
 	 * Removes a vertex within the graph
 	 * @param v A vertex to be removed of the graph
 	 * @return True if the vertex was removed or false if the vertex didn't exist
 	 */
-	public boolean removeVertex(Node<T> node);
+	public boolean removeVertex(T node);
 	
 	/**
 	 * Removes an edge within the graph
@@ -43,7 +43,7 @@ public interface IGraph<T> {
 	 * @param A A vertex connected with V
 	 * @param A A vertex connected with U
 	 */
-	public void removeEdge(Node<T> A, Node<T> B);
+	public void removeEdge(T A, T B);
 	
 	/**
 	 * Gives a list of adjacent vertices of V
@@ -51,8 +51,7 @@ public interface IGraph<T> {
 	 * @param node The vertex to be consulted its adjacent vertices
 	 * @return A list with all the adjacent vertices of node
 	 */
-	@SuppressWarnings("rawtypes")
-	public List<T> vertexAdjacent(Node node);
+	public List<T> vertexAdjacent(T node);
 	
 	/**
 	 * Check if A and B are connected
@@ -61,7 +60,7 @@ public interface IGraph<T> {
 	 * @param B Is a vertex
 	 * @return True if A and B are connected or false if they're not
 	 */
-	public boolean areConnected(Node<T> A, Node<T> B);
+	public boolean areConnected(T A, T B);
 	
 	/**
 	 * <pre> The graph is weighted
@@ -79,11 +78,9 @@ public interface IGraph<T> {
 	
 	public boolean isWeighted();
 
-	@SuppressWarnings("rawtypes")
-	public int getIndex(Node vertex);
+	public int getIndex(T vertex);
 	
-	public Node<T> search(Node<T> A);
+	public T search(T A);
 	
-	public Node<T> search(int pointer);
-	
+	public T search(int index);
 }

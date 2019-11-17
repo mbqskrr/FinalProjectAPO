@@ -11,12 +11,12 @@ public class AdjacencyList<T> implements IGraph<T>{
 	 * Map with all the vertices within the graph.
 	 * Key of the map is the Vertex and Value is the position of the vertex in the adjacencyList
 	 */
-	private Map<Node<T>, Integer> vertices;	
+	private Map<T, Integer> vertices;	
 	
 	/**
 	 * A list for each Vertex within the graph which has a list with all its adjacent Vertices 
 	 */
-	private List<List<Node<T>>> adjacencyLists;
+	private List<List<T>> adjacencyLists;
 	
 	/**
 	 * Property that say if a graph is directed or not
@@ -46,49 +46,48 @@ public class AdjacencyList<T> implements IGraph<T>{
 	 */
 	private final void initialize() {
 		isDirected = false;
-		adjacencyLists = new ArrayList<List<Node<T>>>();
-		vertices = new HashMap<Node<T>, Integer>();
+		adjacencyLists = new ArrayList<List<T>>();
+		vertices = new HashMap<T, Integer>();
 	}
 
 	@Override
-	public boolean addVertex(Node<T> node) {
+	public boolean addVertex(T node) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public void addEdge(Node<T> A, Node<T> B) {
+	public void addEdge(T A, T B) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void addEdge(Node<T> A, Node<T> B, double l) {
+	public void addEdge(T A, T B, double l) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public boolean removeVertex(Node<T> node) {
+	public boolean removeVertex(T node) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public void removeEdge(Node<T> A, Node<T> B) {
+	public void removeEdge(T A, T B) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@SuppressWarnings("rawtypes")
 	@Override
-	public List<T> vertexAdjacent(Node node) {
+	public List<T> vertexAdjacent(T node) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public boolean areConnected(Node<T> A, Node<T> B) {
+	public boolean areConnected(T A, T B) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -117,31 +116,30 @@ public class AdjacencyList<T> implements IGraph<T>{
 		return false;
 	}
 
-	@SuppressWarnings("rawtypes")
 	@Override
-	public int getIndex(Node vertex) {
+	public int getIndex(T vertex) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public Node<T> search(Node<T> A) {
+	public T search(T A) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public Node<T> search(int pointer) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Map<Node<T>, Integer> getVertices() {
+	public Map<T, Integer> getVertices() {
 		return vertices;
 	}
 
-	public List<List<Node<T>>> getAdjacencyLists() {
+	public List<List<T>> getAdjacencyLists() {
 		return adjacencyLists;
+	}
+
+	@Override
+	public T search(int index) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
