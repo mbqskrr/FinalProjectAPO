@@ -21,6 +21,23 @@ class AdjacencyMatrixTest {
 		g.addVertex("Cali");
 		g.addVertex("Yumbo");
 	}
+	
+	@Test
+	void setUpScenary2() {
+		g = new AdjacencyMatrix<String>();
+		g.addVertex("Cali");
+		g.addVertex("Yumbo");
+		g.addVertex("Jamundi");
+		g.addVertex("Buenaventura");
+		g.addVertex("Tulua");
+		g.addEdge("Cali", "Yumbo", 15);
+		g.addEdge("Cali", "Jamundi", 11);
+		g.addEdge("Yumbo", "Jamundi", 12);
+		g.addEdge("Yumbo", "Buenaventura", 14);
+		g.addEdge("Yumbo", "Tulua", 1);
+		g.addEdge("Jamundi", "Buenaventura", 3);
+		g.addEdge("Buenaventura", "Tulua", 2);
+	}
 
 	@Test
 	void addVertexTest() {
@@ -57,6 +74,26 @@ class AdjacencyMatrixTest {
 		assertEquals(true, g.search("Yumbo"));
 		assertEquals(true, g.search("Cali"));
 		assertFalse("Encuentra un vertice que no esta", g.search("Tumaco"));
+	}
+	
+	@Test
+	void weightMatrixTest() {
+		setUpScenary2();
+		assertEquals(14, g.weightMatrix()[1][3]);
+		assertEquals(14, g.weightMatrix()[3][1]);
+		assertEquals(15, g.weightMatrix()[1][0]);
+		assertEquals(15, g.weightMatrix()[0][1]);
+		assertEquals(12, g.weightMatrix()[1][2]);
+		assertEquals(12, g.weightMatrix()[2][1]);
+		assertEquals(11, g.weightMatrix()[0][2]);
+		assertEquals(11, g.weightMatrix()[2][0]);
+		assertEquals(1, g.weightMatrix()[1][4]);
+		assertEquals(1, g.weightMatrix()[4][1]);
+		assertEquals(3, g.weightMatrix()[2][3]);
+		assertEquals(3, g.weightMatrix()[3][2]);
+		assertEquals(2, g.weightMatrix()[3][4]);
+		assertEquals(2, g.weightMatrix()[4][3]);
+		//assertEquals(Integer.MAX_VALUE, g.weightMatrix()[4][0]);
 	}
 
 }
