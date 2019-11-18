@@ -52,14 +52,39 @@ public class AdjacencyList<T> implements IGraph<T>{
 
 	@Override
 	public boolean addVertex(T node) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean added = false;
+		// Check if the vertex is not on the map already
+		if(!searchVertex(node)) {
+			@SuppressWarnings("unchecked")
+			// Create a new empty list for that vertex
+			List<T> vList = (List<T>) new ArrayList<Object>();
+			// Get the position for this new vertex
+			int index = adjacencyLists.size();
+			// Add the vertex to the map
+			vertices.put(node, index);
+			// Add the vertex empty list to the adjacencyLists
+			adjacencyLists.add(vList);
+			// Change the value to true indicating that it was possible to add the vertex
+			added = true;
+		}
+		return added;
+	}
+
+	private boolean searchVertex(T node) {
+		return vertices.containsValue(node);
 	}
 
 	@Override
 	public void addEdge(T A, T B) {
 		// TODO Auto-generated method stub
-		
+		int ValueA = vertices.get(A);
+		int ValueB = vertices.get(B);
+		if(!isDirected) {
+			adjacencyLists.get(ValueA).add(B);
+			adjacencyLists.get(ValueB).add(A);
+		}else {
+			adjacencyLists.get(ValueA).add(B);
+		}
 	}
 
 	@Override
@@ -68,10 +93,25 @@ public class AdjacencyList<T> implements IGraph<T>{
 		
 	}
 
+	@SuppressWarnings("unlikely-arg-type")
 	@Override
 	public boolean removeVertex(T node) {
-		// TODO Auto-generated method stub
-		return false;
+		// first looks if the vertex exists
+		if (vertices.containsKey(node)) {
+			// remove the existing list which represents the adjacent vertices of the vertex
+			// to remove
+			adjacencyLists.remove(vertices.get(node));
+			// remove any existing connection to the vertex
+			for (int i = 0; i < adjacencyLists.size(); i++) {
+				if (adjacencyLists.get(i).contains(node))
+					adjacencyLists.get(i).remove(i);
+			}
+			// removes the vertex form the map
+			vertices.remove(node);
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
@@ -88,8 +128,19 @@ public class AdjacencyList<T> implements IGraph<T>{
 
 	@Override
 	public boolean areConnected(T A, T B) {
-		// TODO Auto-generated method stub
-		return false;
+		int aValue = vertices.get(A);
+		int bValue = vertices.get(B);
+		
+//		return adjacencyLists.get(uValor).contains(v) || adjacencyLists.get(uValor).contains(v);
+//		This return exists in case there is no need of being specific about the direction
+		
+		if(isDirected) {
+			return adjacencyLists.get(aValue).contains(B);
+			// this returns if u connected and directed to v
+		}else {
+			return adjacencyLists.get(aValue).contains(B) && adjacencyLists.get(bValue).contains(A);
+			// in case the graph is not connected then both should be connected to each other
+		}
 	}
 
 	@Override
@@ -100,8 +151,7 @@ public class AdjacencyList<T> implements IGraph<T>{
 
 	@Override
 	public boolean isDirected() {
-		// TODO Auto-generated method stub
-		return false;
+		return isDirected;
 	}
 
 	@Override
@@ -119,13 +169,12 @@ public class AdjacencyList<T> implements IGraph<T>{
 	@Override
 	public int getIndex(T vertex) {
 		// TODO Auto-generated method stub
-		return 0;
+		return vertices.get(vertex);
 	}
 
 	@Override
-	public T search(T A) {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean search(T A) {
+		return vertices.containsValue(A);
 	}
 
 	public Map<T, Integer> getVertices() {

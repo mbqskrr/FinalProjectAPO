@@ -80,7 +80,7 @@ public interface IGraph<T> {
 
 	public int getIndex(T vertex);
 	
-	public T search(T A);
+	public boolean search(T A);
 	
 	public T search(int index);
 }

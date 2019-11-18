@@ -1,9 +1,12 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.NavigableSet;
+import java.util.Set;
 import java.util.TreeSet;
 
 public class AdjacencyMatrix<T> implements IGraph<T>{
@@ -11,7 +14,7 @@ public class AdjacencyMatrix<T> implements IGraph<T>{
 	 /**
      * The length of the matrix when using the default Constructor.
      */
-    private static final int DEFAULT_CAPACITY = 10;
+    private static final int DEFAULT_CAPACITY = 21;
 
     /**
      * The rate at which the matrix's length increases as it becomes full.
@@ -112,62 +115,143 @@ public class AdjacencyMatrix<T> implements IGraph<T>{
 
 	@Override
 	public boolean addVertex(T node) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean added = false;
+        Integer index;
+        if (verticesIndices.get(node) != null) {
+            if (emptySlots.isEmpty()) {//No reusable rows/columns in the matrix
+                if (size == adjacencyMatrix.length) {//Needs to initialize a bigger array
+                    double[][] placeHolder = adjacencyMatrix;
+                    int newLength = (int) (adjacencyMatrix.length * GROWTH_FACTOR);
+                    adjacencyMatrix = new double[newLength][newLength];
+                    for (int i = 0; i < placeHolder.length; i++) {
+                        System.arraycopy(placeHolder[i], 0, adjacencyMatrix[i], 0, placeHolder.length);
+                    }
+                }
+                size++;
+                index = size - 1;
+            } else {
+                index = emptySlots.pollFirst();//TODO: May assign null?
+            }
+            vertices.put(index, node);
+            verticesIndices.put(node, index);
+            added = true;
+        }
+        return added;
 	}
 
 	@Override
 	public void addEdge(T A, T B) {
-		// TODO Auto-generated method stub
-		
+		 Integer x = verticesIndices.get(A);
+	        Integer y = verticesIndices.get(B);
+	        if (x != null && y != null) {
+	            if (!isDirected) {
+	                adjacencyMatrix[x][y] = 1;
+	                adjacencyMatrix[y][x] = 1;
+	            } else {
+	                adjacencyMatrix[x][y] = 1;
+	            }
+	        }else{}//TODO: May need to change return type to boolean for when the edge couldn't be added
 	}
 
 	@Override
 	public void addEdge(T A, T B, double l) {
-		// TODO Auto-generated method stub
-		
+		int x = verticesIndices.get(A);//TODO: check pre-conditions
+        int y = verticesIndices.get(B);
+        if (!isDirected) {
+            adjacencyMatrix[x][y] = 1;
+            adjacencyMatrix[y][x] = 1;
+            adjacencyMatrixWeight[x][y] = l;
+            adjacencyMatrixWeight[y][x] = l;
+        } else {
+            adjacencyMatrix[x][y] = 1;
+            adjacencyMatrixWeight[x][y] = l;
+        }
 	}
 
 	@Override
 	public boolean removeVertex(T node) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean removed = false;
+		Integer position = verticesIndices.get(node);
+		if (position != null) {
+			vertices.remove(position);
+			verticesIndices.remove(node);
+			emptySlots.add(position);
+			for (int i = 0; i < size; i++) {
+				adjacencyMatrix[position][i] = 0;
+			}
+			for (int i = 0; i < size; i++) {
+				adjacencyMatrix[i][position] = 0;
+			}
+			removed = true;
+		}
+		return removed;
 	}
 
 	@Override
 	public void removeEdge(T A, T B) {
-		// TODO Auto-generated method stub
-		
+		 if (!isDirected) {
+	            adjacencyMatrix[(int) A][(int) B] = 0;//TODO: check pre-conditions
+	            adjacencyMatrix[(int) B][(int) A] = 0;
+	        } else {
+	            adjacencyMatrix[(int) A][(int) B] = 0;
+	        }
 	}
 
 	@Override
 	public List<T> vertexAdjacent(T node) {
-		// TODO Auto-generated method stub
-		return null;
+		Integer position = verticesIndices.get(node);
+        List<T> adjacentVertices = null;
+        if (position != null) {
+            Set<Integer> adjacentVerticesPositions = new HashSet<>();
+            for (int i = 0; i < size; i++) {
+                if (adjacencyMatrix[position][i] != 0) {//Vertex at position i is adjacent
+                    adjacentVerticesPositions.add(i);
+                }
+            }
+            if (isDirected) {//Only necessary to execute if graph is directed
+                for (int i = 0; i < size; i++) {
+                    if (adjacencyMatrix[i][position] != 0) {//Vertex at position i is adjacent
+                        adjacentVerticesPositions.add(i);
+                    }
+                }
+            }
+            adjacentVertices = new ArrayList<>();
+            for (Integer key : adjacentVerticesPositions
+            ) {
+                adjacentVertices.add(vertices.get(key));
+            }
+        }
+        return adjacentVertices;
 	}
 
 	@Override
 	public boolean areConnected(T A, T B) {
-		// TODO Auto-generated method stub
-		return false;
+		 int uValor = verticesIndices.get(A);//TODO: check if 'u' and 'v' exist in the graph
+	        int vValor = verticesIndices.get(B);
+	        // return adjacencyMatrix[uValor][vValor] == 1 && adjacencyMatrix[vValor][uValor] == 1;
+	        // This return exists in case there is no need of being specific about the direction
+	        if (isDirected) {
+	            return adjacencyMatrix[uValor][vValor] == 1;
+	            // this returns if u connected and directed to v
+	        } else {
+	            return adjacencyMatrix[uValor][vValor] == 1 && adjacencyMatrix[vValor][uValor] == 1;
+	            // in case the graph is not connected then both should be connected to each other
+	        }
 	}
 
 	@Override
 	public double[][] weightMatrix() {
-		// TODO Auto-generated method stub
-		return null;
+		return adjacencyMatrixWeight;
 	}
 
 	@Override
 	public boolean isDirected() {
-		// TODO Auto-generated method stub
-		return false;
+		return isDirected;
 	}
 
 	@Override
 	public int getVertexSize() {
-		// TODO Auto-generated method stub
-		return 0;
+		return vertices.size();
 	}
 
 	@Override
@@ -177,20 +261,17 @@ public class AdjacencyMatrix<T> implements IGraph<T>{
 	}
 
 	public int getIndex(T vertex) {
-		// TODO Auto-generated method stub
-		return 0;
+		return verticesIndices.get(vertex);
 	}
 
 	@Override
-	public T search(T A) {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean search(T A) {
+		return verticesIndices.containsValue(A);
 	}
 
 	@Override
 	public T search(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		return vertices.get(index);
 	}
 
 }
