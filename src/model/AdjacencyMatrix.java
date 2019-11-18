@@ -266,7 +266,7 @@ public class AdjacencyMatrix<T> implements IGraph<T>{
 
 	@Override
 	public boolean search(T A) {
-		return verticesIndices.containsValue(A);
+		return vertices.containsValue(A);
 	}
 
 	@Override

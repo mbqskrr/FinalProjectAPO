@@ -30,13 +30,15 @@ class AdjacencyMatrixTest {
 	
 	@Test
 	void addEdgeTest() {
-		fail("Not yet implemented");
-		assertTrue(null, true);
+		setUpScenary1();
+		g.addEdge("Cali", "Yumbo", 2.5);
+		assertEquals(true, g.areConnected("Cali", "Yumbo"));
 	}
 	
 	@Test
 	void searchTest() {
 		setUpScenary1();
+		assertEquals(true, g.search("Yumbo"));
 		assertEquals(true, g.search("Cali"));
 	}
 
