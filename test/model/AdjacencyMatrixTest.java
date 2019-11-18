@@ -93,7 +93,15 @@ class AdjacencyMatrixTest {
 		assertEquals(3, g.weightMatrix()[3][2]);
 		assertEquals(2, g.weightMatrix()[3][4]);
 		assertEquals(2, g.weightMatrix()[4][3]);
-		//assertEquals(Integer.MAX_VALUE, g.weightMatrix()[4][0]);
+		assertEquals(Double.MAX_VALUE, g.weightMatrix()[4][0]);
+		assertEquals(Double.MAX_VALUE, g.weightMatrix()[0][4]);
+		assertEquals(Double.MAX_VALUE, g.weightMatrix()[3][0]);
+		assertEquals(Double.MAX_VALUE, g.weightMatrix()[0][3]);
+		assertEquals(0, g.weightMatrix()[0][0]);
+		assertEquals(0, g.weightMatrix()[1][1]);
+		assertEquals(0, g.weightMatrix()[2][2]);
+		assertEquals(0, g.weightMatrix()[3][3]);
+		assertEquals(0, g.weightMatrix()[4][4]);
 	}
 
 }

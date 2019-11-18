@@ -242,6 +242,15 @@ public class AdjacencyMatrix<T> implements IGraph<T>{
 
 	@Override
 	public double[][] weightMatrix() {
+		for (int i = 0; i < adjacencyMatrix.length; i++) {
+			for (int j = 0; j < adjacencyMatrix[i].length; j++) {
+				if (i != j) {
+					if (adjacencyMatrixWeight[i][j] == 0) {
+						adjacencyMatrixWeight[i][j] = Double.MAX_VALUE;
+					}
+				}
+			}
+		}
 		return adjacencyMatrixWeight;
 	}
 
