@@ -86,13 +86,16 @@ public class GraphAlgorithms<T> {
 		}
 		F[index] = true;
 		cost[index] = 0;
-		int v = minimun(n);
-		F[v] = true;
-		//update distance of unmarked vertices
-		for (int i = 1; i < n; i++) {
-			if(!F[i]) {
-				if (cost[v] + weights[v][i] < cost[i]) {
-					cost[i] = (int) (cost[v] + weights[v][i]);
+		//steps to mark the n-1 vertices
+		for (int k = 0; k < n; k++) {
+			int v = minimun(n);
+			F[v] = true;
+			//update distance of unmarked vertices
+			for (int i = 0; i < n; i++) {
+				if(!F[i]) {
+					if (cost[v] + weights[v][i] < cost[i]) {
+						cost[i] = (int) (cost[v] + weights[v][i]);
+					}
 				}
 			}
 		}
@@ -138,7 +141,7 @@ public class GraphAlgorithms<T> {
 	}
 	
 	public static <T> List<T> kruskal(PriorityQueue<Double> sortedEdges){
-		PriorityQueue<T> q = new PriorityQueue<T>();
+		//PriorityQueue<T> q = new PriorityQueue<T>();
 		
 		return null;
 	}
