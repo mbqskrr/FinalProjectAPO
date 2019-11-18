@@ -112,7 +112,7 @@ public class GraphAlgorithms<T> {
 	 * @param weightsMatrix
 	 * @return the minimum paths between every vertex
 	 */
-	public static <T> double[][] floydwarshall(IGraph<T> g) {
+	public static <T> double[][] floydWarshall(IGraph<T> g) {
 		double[][] weightsMatrix = g.weightMatrix();
 		for (int i = 0; i < weightsMatrix.length; i++) {
 			for (int j = 0; j < weightsMatrix.length; j++) {

@@ -117,7 +117,7 @@ public class AdjacencyMatrix<T> implements IGraph<T>{
 	public boolean addVertex(T node) {
 		boolean added = false;
         Integer index;
-        if (verticesIndices.get(node) != null) {
+        if (verticesIndices.get(node) == null) {
             if (emptySlots.isEmpty()) {//No reusable rows/columns in the matrix
                 if (size == adjacencyMatrix.length) {//Needs to initialize a bigger array
                     double[][] placeHolder = adjacencyMatrix;
