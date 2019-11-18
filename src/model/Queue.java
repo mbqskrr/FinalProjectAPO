@@ -1,4 +1,4 @@
-package collections;
+package model;
 
 import java.util.Collection;
 
