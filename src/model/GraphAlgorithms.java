@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.PriorityQueue;
 
-import collections.ICollection;
 import model.IGraph;
 
 public class GraphAlgorithms<T> {
@@ -20,7 +19,7 @@ public class GraphAlgorithms<T> {
 	 * @return A list with a resultant order due to a BFS
 	 */
 	public static <T> List<T> bfs(IGraph<T> g, T node){
-		return traversal(g, node, new collections.Stack<T>());
+		return traversal(g, node, new Stack<T>());
 	}
 	
 	/**
@@ -31,7 +30,7 @@ public class GraphAlgorithms<T> {
 	 * @return A list with a resultant order due to a DFS
 	 */
 	public static <T> List<T> dfs (IGraph<T> g, T node){
-		return traversal(g, node, new collections.Queue<T>());
+		return traversal(g, node, new model.Queue<T>());
 	}
 
 	/**
@@ -64,10 +63,10 @@ public class GraphAlgorithms<T> {
 	}
 	
 	/**
-	 * minimum path given a vertex of origin towards all others
-	 * @param origin
-	 * @param weights
-	 * @param g
+	 *This method allows to use a Dijkstra algorithm by the matrix matrix
+	 * @param origin The starting node
+	 * @param weights the weights matrix
+	 * @param g the graph
 	 */
 	public static<T> void dijkstra(T origin, double[][] weights, IGraph<T> g) {
 		int index = g.getIndex(origin); 
@@ -131,7 +130,9 @@ public class GraphAlgorithms<T> {
 	}
 	
 	public static <T> List<T> kruskal(PriorityQueue<Double> sortedEdges){
-		return null;
+		PriorityQueue<T> q = new PriorityQueue<T>();
+		
+		return ;
 	}
 	
 }
