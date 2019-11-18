@@ -1,8 +1,9 @@
 package model;
 
-import static org.junit.Assert.assertTrue;
+//import static org.junit.Assert.assertTrue;
 //import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.Test;
 
@@ -30,11 +31,17 @@ class GraphAlgorithmsTest {
 	@Test
 	void floydWarshallTest() {
 		setUpScenary();
-		//double[][] wm = graph.weightMatrix();
 		GraphAlgorithms.floydWarshall(graph);
-		
-		//assertTrue("No se está ejecutando el algoritmo correctamente", graph.weightMatrix()[0][1] == 15);
-		assertEquals(11, graph.weightMatrix()[2][0]);
+		assertEquals(16, graph.weightMatrix()[4][0]); 
+		assertNotEquals(Double.MAX_VALUE, graph.weightMatrix()[0][4]);
+		assertEquals(14, graph.weightMatrix()[3][0]); 
+		assertNotEquals(Double.MAX_VALUE, graph.weightMatrix()[0][3]);
+		assertEquals(3, graph.weightMatrix()[1][3]);
+		assertNotEquals(14, graph.weightMatrix()[3][1]);
+		assertEquals(6, graph.weightMatrix()[1][2]);
+		assertNotEquals(12, graph.weightMatrix()[3][0]);
+		assertEquals(5, graph.weightMatrix()[2][4]);
+		assertNotEquals(Double.MAX_VALUE, graph.weightMatrix()[4][2]);
 	}
 
 }
