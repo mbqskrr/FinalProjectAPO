@@ -66,19 +66,21 @@ public class GraphAlgorithms<T> {
 	/**
 	 * minimum path given a vertex of origin towards all others
 	 * @param origin
-	 * @param weights
 	 * @param g
 	 */
-	public static<T> void dijkstra(T origin, double[][] weights, IGraph<T> g) {
+	public static<T> void dijkstra(T origin, IGraph<T> g) {
+		double[][] weights = g.weightMatrix(); 
 		int index = g.getIndex(origin); 
-		int n = weights.length;
+		int n = g.getVertexSize();
+		cost = new int[n];
+		F = new boolean[n];
 		for (int i = 0; i < n; i++) {
 			F[i] = false;
 			cost[i] = (int) weights[index][i];
 		}
 		F[index] = true;
 		cost[index] = 0;
-		int v = minimun(weights);
+		int v = minimun(n);
 		F[v] = true;
 		//update distance of unmarked vertices
 		for (int i = 1; i < n; i++) {
@@ -94,14 +96,13 @@ public class GraphAlgorithms<T> {
 	 * select unmarked vertex shorter distance
 	 * @return v
 	 */
-	private static int minimun(double[][] weights) {
-		int n = weights.length;
+	private static int minimun(int n) {
 		int max = Integer.MAX_VALUE;
 		int v = 1;
-		for (int i = 1; i < n; i++) {
-			if (!F[i] && (cost[i] <= max)) {
-				max = cost[i];
-				v = i;
+		for (int j = 0; j < n; j++) {
+			if (!F[j] && (cost[j] <= max)) {
+				max = cost[j];
+				v = j;
 			}
 		}
 		return v;
@@ -109,7 +110,7 @@ public class GraphAlgorithms<T> {
 	
 	/**
 	 * Implementation of FloydWarshall algorithm
-	 * @param weightsMatrix
+	 * @param g
 	 * @return the minimum paths between every vertex
 	 */
 	public static <T> double[][] floydWarshall(IGraph<T> g) {
@@ -132,6 +133,10 @@ public class GraphAlgorithms<T> {
 	
 	public static <T> List<T> kruskal(PriorityQueue<Double> sortedEdges){
 		return null;
+	}
+
+	public static int[] getCost() {
+		return cost;
 	}
 	
 }
