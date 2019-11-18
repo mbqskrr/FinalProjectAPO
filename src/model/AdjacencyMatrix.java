@@ -111,6 +111,7 @@ public class AdjacencyMatrix<T> implements IGraph<T>{
         adjacencyMatrix = new double[capacity][capacity];
         vertices = new HashMap<>();
         verticesIndices = new HashMap<>();
+        adjacencyMatrixWeight = new double[capacity][capacity];
     }
 
 	@Override
