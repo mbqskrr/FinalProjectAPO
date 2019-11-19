@@ -19,7 +19,7 @@ public class GraphAlgorithms<T> {
 	 * @return A list with a resultant order due to a BFS
 	 */
 	public static <T> List<T> bfs(IGraph<T> g, T node){
-		return traversal(g, node, new Stack<T>());
+		return traversal(g, node, new model.Queue<T>());
 	}
 	
 	/**
@@ -30,7 +30,7 @@ public class GraphAlgorithms<T> {
 	 * @return A list with a resultant order due to a DFS
 	 */
 	public static <T> List<T> dfs (IGraph<T> g, T node){
-		return traversal(g, node, new model.Queue<T>());
+		return traversal(g, node, new model.Stack<T>());
 	}
 
 	/**
@@ -63,16 +63,9 @@ public class GraphAlgorithms<T> {
 	}
 	
 	/**
-<<<<<<< HEAD
-	 * minimum path given a vertex of origin towards all others
-	 * @param origin
-	 * @param g
-=======
 	 *This method allows to use a Dijkstra algorithm by the matrix matrix
 	 * @param origin The starting node
-	 * @param weights the weights matrix
 	 * @param g the graph
->>>>>>> edf5fbf03ad03ac5cb0c7b44d74d1bdebd9a8a86
 	 */
 	public static<T> void dijkstra(T origin, IGraph<T> g) {
 		double[][] weights = g.weightMatrix(); 
@@ -88,7 +81,7 @@ public class GraphAlgorithms<T> {
 		cost[index] = 0;
 		//steps to mark the n-1 vertices
 		for (int k = 0; k < n; k++) {
-			int v = minimun(n);
+			int v = minimum(n);
 			F[v] = true;
 			//update distance of unmarked vertices
 			for (int i = 0; i < n; i++) {
@@ -103,9 +96,9 @@ public class GraphAlgorithms<T> {
 	
 	/**
 	 * select unmarked vertex shorter distance
-	 * @return v
+	 * @return v the minimum cost in the array
 	 */
-	private static int minimun(int n) {
+	private static int minimum(int n) {
 		int max = Integer.MAX_VALUE;
 		int v = 1;
 		for (int j = 0; j < n; j++) {
@@ -119,7 +112,7 @@ public class GraphAlgorithms<T> {
 	
 	/**
 	 * Implementation of FloydWarshall algorithm
-	 * @param g
+	 * @param g the graph
 	 * @return the minimum paths between every vertex
 	 */
 	public static <T> double[][] floydWarshall(IGraph<T> g) {

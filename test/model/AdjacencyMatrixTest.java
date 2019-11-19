@@ -103,5 +103,20 @@ class AdjacencyMatrixTest {
 		assertEquals(0, g.weightMatrix()[3][3]);
 		assertEquals(0, g.weightMatrix()[4][4]);
 	}
+	
+	@Test
+	void getIndexTest() {
+		setUpScenary2();
+		assertEquals(0, g.getIndex("Cali"));
+		assertEquals(4, g.getIndex("Tulua"));
+		assertNotEquals(2, g.getIndex("Buenaventura"));
+	}
+	
+	@Test
+	void getVertexSizeTest() {
+		setUpScenary2();
+		assertEquals(5, g.getVertexSize());
+		assertNotEquals(4, g.getVertexSize());
+	}
 
 }

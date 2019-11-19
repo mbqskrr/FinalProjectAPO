@@ -3,35 +3,36 @@ package model;
 import java.util.Collection;
 
 public class Stack<T> implements ICollection<T>{
+	
+	private java.util.Stack<T> myStack;
+
+	public Stack() {
+		myStack = new java.util.Stack<T>();
+	}
 
 	@Override
 	public void add(T element) {
-		// TODO Auto-generated method stub
-		
+		myStack.push(element);
 	}
 
 	@Override
 	public T poll() {
-		// TODO Auto-generated method stub
-		return null;
+		return myStack.pop();
 	}
 
 	@Override
 	public T peek() {
-		// TODO Auto-generated method stub
-		return null;
+		return myStack.peek();
 	}
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		return myStack.empty();
 	}
 
 	@Override
 	public void addAll(Collection<T> c) {
-		// TODO Auto-generated method stub
-		
+		myStack.addAll(c);
 	}
 
 }
