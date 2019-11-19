@@ -108,7 +108,6 @@ class GraphAlgorithmsTest {
 		assertEquals("I", GraphAlgorithms.bfs(graph, "A").get(8));
 		assertEquals("J", GraphAlgorithms.bfs(graph, "A").get(9));
 		
-		
 		IGraph<Integer> g = new AdjacencyMatrix<Integer>();
 		g.addVertex(1);
 		g.addVertex(2);
@@ -146,6 +145,37 @@ class GraphAlgorithmsTest {
 		assertEquals(7, GraphAlgorithms.bfs(g, 1).get(6));
 		assertEquals(8, GraphAlgorithms.bfs(g, 1).get(7));
 		assertEquals(9, GraphAlgorithms.bfs(g, 1).get(8));
+	}
+	
+	@Test
+	void dfsTest() {
+		setUpScenary2();
+		assertEquals("A", GraphAlgorithms.dfs(graph, "A").get(0));
+		assertEquals("D", GraphAlgorithms.dfs(graph, "A").get(1));
+		assertEquals("C", GraphAlgorithms.dfs(graph, "A").get(2));
+		assertEquals("H", GraphAlgorithms.dfs(graph, "A").get(3));
+		assertEquals("G", GraphAlgorithms.dfs(graph, "A").get(4));
+		assertEquals("J", GraphAlgorithms.dfs(graph, "A").get(5));
+		assertEquals("I", GraphAlgorithms.dfs(graph, "A").get(6));
+		assertEquals("B", GraphAlgorithms.dfs(graph, "A").get(7));
+		assertEquals("F", GraphAlgorithms.dfs(graph, "A").get(8));
+		assertEquals("E", GraphAlgorithms.dfs(graph, "A").get(9));
+		
+		IGraph<Integer> g = new AdjacencyMatrix<Integer>();
+		g.addVertex(1);
+		g.addVertex(2);
+		g.addVertex(3);
+		g.addVertex(4);
+		g.addVertex(5);
+		g.addEdge(1, 2);
+		g.addEdge(1, 3);
+		g.addEdge(1, 5);
+		g.addEdge(2, 4);
+		assertEquals(1, GraphAlgorithms.dfs(g, 1).get(0));
+		assertEquals(5, GraphAlgorithms.dfs(g, 1).get(1));
+		assertEquals(3, GraphAlgorithms.dfs(g, 1).get(2));
+		assertEquals(2, GraphAlgorithms.dfs(g, 1).get(3));
+		assertEquals(4, GraphAlgorithms.dfs(g, 1).get(4));
 	}
 
 }
