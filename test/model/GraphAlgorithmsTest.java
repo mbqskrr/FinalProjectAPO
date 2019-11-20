@@ -66,7 +66,56 @@ class GraphAlgorithmsTest {
 		graph.addEdge("G", "I");
 		graph.addEdge("G", "J");
 	}
+	
+	@Test
+	void setUpScenary3() {
+		graph = new AdjacencyMatrix<String>();
+		graph.addVertex("A");
+		graph.addVertex("B");
+		graph.addVertex("C");
+		graph.addVertex("D");
+		graph.addVertex("E");
+		graph.addVertex("F");
+		graph.addVertex("G");
 
+		graph.addEdge("A", "B", 7);
+		graph.addEdge("A", "D", 5);
+		graph.addEdge("B", "C", 8);
+		graph.addEdge("B", "D", 9);
+		graph.addEdge("B", "E", 7);
+		graph.addEdge("C", "E", 5);
+		graph.addEdge("D", "E", 15);
+		graph.addEdge("D", "F", 6);
+		graph.addEdge("E", "F", 8);
+		graph.addEdge("E", "G", 9);
+		graph.addEdge("F", "G", 11);
+	}
+	
+	@Test
+	void setUpScenary4() {
+		graph = new AdjacencyMatrix<String>();
+		graph.addVertex("Boston");
+		graph.addVertex("Nueva York");
+		graph.addVertex("Chicago");
+		graph.addVertex("Dallas"); 
+		graph.addVertex("Denver");
+		graph.addVertex("San Francisco");
+		graph.addVertex("Los Angeles");
+		//Edges
+		graph.addEdge("San Francisco", "Los Angeles", 400);
+		graph.addEdge("San Francisco", "Denver", 1000);
+		graph.addEdge("San Francisco", "Chicago", 1500);
+		graph.addEdge("Los Angeles", "Chicago", 1400);
+		graph.addEdge("Los Angeles", "Dallas", 1100);
+		graph.addEdge("Denver", "Chicago", 500);
+		graph.addEdge("Denver", "Dallas", 600);
+		graph.addEdge("Dallas", "Chicago", 800);
+		graph.addEdge("Dallas", "Nueva York", 1200);
+		graph.addEdge("Chicago", "Nueva York", 700);
+		graph.addEdge("Boston", "Nueva York", 300);
+		graph.addEdge("Boston", "Chicago", 900);
+	}
+	
 	@Test
 	void floydWarshallTest() {
 		setUpScenary();
@@ -92,6 +141,14 @@ class GraphAlgorithmsTest {
 		assertEquals(7, GraphAlgorithms.getCost()[2]);
 		assertEquals(3, GraphAlgorithms.getCost()[1]);
 		assertEquals(10, GraphAlgorithms.getCost()[0]);
+		
+		setUpScenary4();
+		GraphAlgorithms.dijkstra("Dallas", graph);
+		assertEquals(1500, GraphAlgorithms.getCost()[0]);
+		GraphAlgorithms.dijkstra("San Francisco", graph);
+		assertEquals(1500, GraphAlgorithms.getCost()[3]);
+		GraphAlgorithms.dijkstra("Chicago", graph);
+		assertEquals(1400, GraphAlgorithms.getCost()[6]);
 	}
 	
 	@Test
@@ -191,6 +248,61 @@ class GraphAlgorithmsTest {
 		assertEquals(3, GraphAlgorithms.dfs(gr, 1).get(2));
 		/*assertEquals(4, GraphAlgorithms.dfs(gr, 1).get(3));
 		assertEquals(5, GraphAlgorithms.dfs(gr, 1).get(4));*/
+	}
+	
+	@Test
+	void primTest() {
+		setUpScenary3();
+		assertEquals(39, GraphAlgorithms.prim("A", graph));
+		IGraph<Integer> g = new AdjacencyMatrix<Integer>();
+		
+		g.addVertex(1);
+		g.addVertex(2);
+		g.addVertex(3);
+		g.addVertex(4);
+		g.addVertex(5);
+		g.addVertex(6);
+		g.addVertex(7);
+		g.addVertex(8);
+		g.addVertex(9);
+		g.addVertex(10);
+		g.addEdge(1, 2, 5);
+		g.addEdge(1, 3, 10);
+		g.addEdge(1, 4, 8);
+		g.addEdge(2, 4, 6);
+		g.addEdge(2, 6, 5);
+		g.addEdge(3, 4, 7);
+		g.addEdge(3, 5, 8);
+		g.addEdge(3, 8, 15);
+		g.addEdge(4, 5, 5);
+		g.addEdge(4, 6, 11);
+		g.addEdge(5, 7, 4);
+		g.addEdge(5, 8, 3);
+		g.addEdge(6, 7, 9);
+		g.addEdge(6, 9, 7);
+		g.addEdge(7, 8, 12);
+		g.addEdge(7, 9, 4);
+		g.addEdge(7, 10, 6);
+		g.addEdge(8, 10, 12);
+		g.addEdge(9, 10, 7);
+		assertEquals(45, GraphAlgorithms.prim(1, g));
+		
+		IGraph<Integer> simpleG = new AdjacencyMatrix<Integer>();
+		simpleG.addVertex(1);
+		simpleG.addVertex(2);
+		simpleG.addVertex(3);
+		simpleG.addVertex(4);
+		simpleG.addVertex(5);
+		simpleG.addVertex(6);
+		simpleG.addEdge(1, 2, 4);
+		simpleG.addEdge(1, 3, 4);
+		simpleG.addEdge(2, 3, 2);
+		simpleG.addEdge(2, 4, 3);
+		simpleG.addEdge(2, 5, 4);
+		simpleG.addEdge(2, 6, 2);
+		simpleG.addEdge(4, 5, 3);
+		simpleG.addEdge(5, 6, 3);
+		assertEquals(14, GraphAlgorithms.prim(1, simpleG));
 	}
 
 }

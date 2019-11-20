@@ -102,7 +102,6 @@ public class AdjacencyMatrix<T> implements IGraph<T>{
 
     /**
      * Auxiliary method used by the Constructor to set values to the class' fields. Creates the adjacency matrix.
-     *
      * @param capacity the initial size of the adjacency matrix
      */
     private void initialize(int capacity) {

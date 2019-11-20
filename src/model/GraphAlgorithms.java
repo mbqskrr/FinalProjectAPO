@@ -8,7 +8,7 @@ import model.IGraph;
 
 public class GraphAlgorithms<T> {
 	
-	private static int[] cost;
+	private static double[] cost;
 	private static boolean[] F;
 	
 	/**
@@ -71,11 +71,11 @@ public class GraphAlgorithms<T> {
 		double[][] weights = g.weightMatrix(); 
 		int index = g.getIndex(origin); 
 		int n = g.getVertexSize();
-		cost = new int[n];
+		cost = new double[n];
 		F = new boolean[n];
 		for (int i = 0; i < n; i++) {
 			F[i] = false;
-			cost[i] = (int) weights[index][i];
+			cost[i] = weights[index][i];
 		}
 		F[index] = true;
 		cost[index] = 0;
@@ -99,7 +99,7 @@ public class GraphAlgorithms<T> {
 	 * @return v the minimum cost in the array
 	 */
 	private static int minimum(int n) {
-		int max = Integer.MAX_VALUE;
+		double max = Integer.MAX_VALUE;
 		int v = 1;
 		for (int j = 0; j < n; j++) {
 			if (!F[j] && (cost[j] <= max)) {
@@ -129,17 +129,60 @@ public class GraphAlgorithms<T> {
 		return weightsMatrix;
 	}
 	
-	public static <T> List<T> prim(T node){
-		return null;
+	public static <T> int prim(T node, IGraph<T> graph){
+		double[][] weights = graph.weightMatrix();
+		int n = graph.getVertexSize();
+		int index = graph.getIndex(node);
+		int minLength = 0;
+		int z;
+		double min;
+		double[] cost = new double[n];
+		int[] closer = new int[n];
+		boolean[] W = new boolean[n];
+		for (int i = 0; i < n; i++) {
+			W[i] = false;
+		}
+		W[index] = true;
+		for (int i = 0; i < n; i++) {
+			if (i != index) {
+				cost[i] = weights[index][i];
+				closer[i] = 0;
+			}
+		}
+		for (int i = 0; i < n; i++) {
+			if (i != index) {
+				min = cost[1];
+				z = 1;
+				for (int j = 0; j < n; j++) {
+					if (j != index) {
+						if (cost[j] < min) {
+							min = cost[j];
+							z = j;
+						}
+					}
+				}
+				minLength += min;
+				W[z] = true;
+				cost[z] = Integer.MAX_VALUE;
+				for (int j = 0; j < n; j++) {
+					if (j != index) {
+						if (weights[z][j] < cost[j] && !W[j]) {
+							cost[j] = weights[z][j];
+							closer[j] = z;
+						}
+					}
+				}
+			}
+		}
+		return minLength;
 	}
 	
 	public static <T> List<T> kruskal(PriorityQueue<Double> sortedEdges){
-		//PriorityQueue<T> q = new PriorityQueue<T>();
 		
 		return null;
 	}
 
-	public static int[] getCost() {
+	public static double[] getCost() {
 		return cost;
 	}
 	
