@@ -283,4 +283,17 @@ public class AdjacencyMatrix<T> implements IGraph<T>{
 		return vertices.get(index);
 	}
 
+	@Override
+	public List<Edge<T>> getEdges() {
+		List<Edge<T>> edges = new ArrayList<>();
+		for (int i = 0; i < adjacencyMatrix.length; i++) {
+			for (int j = 0; j < adjacencyMatrix[i].length; j++) {
+				if(adjacencyMatrix[i][j] == 1) {
+					edges.add(new Edge<>(vertices.get(i), vertices.get(j), weightMatrix()[i][j]));
+				}
+			}
+		}
+		return edges;	
+	}
+
 }

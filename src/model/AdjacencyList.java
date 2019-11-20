@@ -191,4 +191,10 @@ public class AdjacencyList<T> implements IGraph<T>{
 		return null;
 	}
 
+	@Override
+	public List<Edge<T>> getEdges() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

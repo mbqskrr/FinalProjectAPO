@@ -83,4 +83,6 @@ public interface IGraph<T> {
 	public boolean search(T A);
 	
 	public T search(int index);
+	
+	public List<Edge<T>> getEdges();
 }
