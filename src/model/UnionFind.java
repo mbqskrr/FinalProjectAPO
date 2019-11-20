@@ -20,7 +20,6 @@ public class UnionFind {
 		int root2 = find(j);
 		if (root2 == root1)
 			return;
-
 		if (rank[root1] > rank[root2]) {
 			parent[root2] = root1;
 		} else if (rank[root2] > rank[root1]) {

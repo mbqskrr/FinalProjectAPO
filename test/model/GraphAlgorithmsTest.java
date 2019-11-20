@@ -3,6 +3,8 @@ package model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 class GraphAlgorithmsTest {
@@ -303,6 +305,50 @@ class GraphAlgorithmsTest {
 		simpleG.addEdge(4, 5, 3);
 		simpleG.addEdge(5, 6, 3);
 		assertEquals(14, GraphAlgorithms.prim(1, simpleG));
+	}
+	
+	@Test
+	void kruskalTest() {
+		setUpScenary3();
+		List<Edge<String>> edges = GraphAlgorithms.kruskal(graph);
+		double totalW = 0;
+		Edge<String> e = edges.get(0);
+		assertEquals(e.getSource(), graph.search(graph.getIndex("A")));
+		assertEquals(e.getDestination(), graph.search(graph.getIndex("D")));
+		assertEquals(e.getWeight(), 5);
+		totalW+= e.getWeight();
+		
+		e = edges.get(1);
+		assertEquals(e.getSource(), graph.search(graph.getIndex("C")));
+		assertEquals(e.getDestination(), graph.search(graph.getIndex("E")));
+		assertEquals(e.getWeight(), 5);
+		totalW+= e.getWeight();
+		
+		e = edges.get(2);
+		assertEquals(e.getSource(), graph.search(graph.getIndex("D")));
+		assertEquals(e.getDestination(), graph.search(graph.getIndex("F")));
+		assertEquals(e.getWeight(), 6);
+		totalW+= e.getWeight();
+		
+		e = edges.get(3);
+		assertEquals(e.getSource(), graph.search(graph.getIndex("A")));
+		assertEquals(e.getDestination(), graph.search(graph.getIndex("B")));
+		assertEquals(e.getWeight(), 7);
+		totalW+= e.getWeight();
+		
+		e = edges.get(4);
+		assertEquals(e.getSource(), graph.search(graph.getIndex("B")));
+		assertEquals(e.getDestination(), graph.search(graph.getIndex("E")));
+		assertEquals(e.getWeight(), 7);
+		totalW+= e.getWeight();
+		
+		e = edges.get(5);
+		assertEquals(e.getSource(), graph.search(graph.getIndex("E")));
+		assertEquals(e.getDestination(), graph.search(graph.getIndex("G")));
+		assertEquals(e.getWeight(), 9);
+		totalW+= e.getWeight();
+		
+		assertEquals(totalW, 39);
 	}
 
 }
