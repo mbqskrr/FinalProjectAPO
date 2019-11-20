@@ -349,6 +349,57 @@ class GraphAlgorithmsTest {
 		totalW+= e.getWeight();
 		
 		assertEquals(totalW, 39);
+		
+		
+		IGraph<Integer> simpleG = new AdjacencyMatrix<Integer>();
+		simpleG.addVertex(1);
+		simpleG.addVertex(2);
+		simpleG.addVertex(3);
+		simpleG.addVertex(4);
+		simpleG.addVertex(5);
+		simpleG.addVertex(6);
+		simpleG.addEdge(1, 2, 4);
+		simpleG.addEdge(1, 3, 4);
+		simpleG.addEdge(2, 3, 2);
+		simpleG.addEdge(2, 4, 3);
+		simpleG.addEdge(2, 5, 4);
+		simpleG.addEdge(2, 6, 2);
+		simpleG.addEdge(4, 5, 3);
+		simpleG.addEdge(5, 6, 3);
+		assertEquals(14, GraphAlgorithms.prim(1, simpleG));
+		List<Edge<Integer>> edges1 = GraphAlgorithms.kruskal(simpleG);
+		totalW = 0;
+		Edge<Integer> e1 = edges1.get(0);
+		assertEquals(e1.getSource(), simpleG.search(simpleG.getIndex(2)));
+		assertEquals(e1.getDestination(), simpleG.search(simpleG.getIndex(3)));
+		assertEquals(e1.getWeight(), 2);
+		totalW+= e1.getWeight();
+		
+		e1 = edges1.get(1);
+		assertEquals(e1.getSource(), simpleG.search(simpleG.getIndex(2)));
+		assertEquals(e1.getDestination(), simpleG.search(simpleG.getIndex(6)));
+		assertEquals(e1.getWeight(), 2);
+		totalW+= e1.getWeight();
+		
+		e1 = edges1.get(2);
+		assertEquals(e1.getSource(), simpleG.search(simpleG.getIndex(2)));
+		assertEquals(e1.getDestination(), simpleG.search(simpleG.getIndex(4)));
+		assertEquals(e1.getWeight(), 3);
+		totalW+= e1.getWeight();
+		
+		e1 = edges1.get(3);
+		assertEquals(e1.getSource(), simpleG.search(simpleG.getIndex(4)));
+		assertEquals(e1.getDestination(), simpleG.search(simpleG.getIndex(5)));
+		assertEquals(e1.getWeight(), 3);
+		totalW+= e1.getWeight();
+		
+		e1 = edges1.get(4);
+		assertEquals(e1.getSource(), simpleG.search(simpleG.getIndex(1)));
+		assertEquals(e1.getDestination(), simpleG.search(simpleG.getIndex(2)));
+		assertEquals(e1.getWeight(), 4);
+		totalW+= e1.getWeight();
+		
+		assertEquals(totalW, 14);
 	}
 
 }

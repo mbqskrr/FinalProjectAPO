@@ -6,7 +6,7 @@ import java.util.List;
 
 import model.IGraph;
 
-public class GraphAlgorithms<T> {
+public class GraphAlgorithms<T, V> {
 	
 	private static double[] cost;
 	private static boolean[] F;
