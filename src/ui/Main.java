@@ -1,8 +1,30 @@
 package ui;
 
-public class Main {
-	
-	public static void main(String[] args) {
-		System.out.println(Integer.MAX_VALUE);	}
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
+public class Main extends Application{
+	
+	private Stage stage;
+
+	public static void main(String[] args) {
+		launch(args);
+	}
+
+	@Override
+	public void start(Stage stage) throws Exception {
+		this.stage = stage;
+		
+		Parent root = FXMLLoader.load(getClass().getResource("Graphs.fxml"));
+		
+		Scene scene = new Scene(root);
+		
+		this.stage.setTitle("Grafos");
+		this.stage.setScene(scene);
+		this.stage.show();
+	}
+	
 }
