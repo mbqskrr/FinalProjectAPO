@@ -1,25 +1,18 @@
 package ui;
 
 import javafx.fxml.FXML;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
+import javafx.scene.layout.AnchorPane;
 
 public class GraphController {
 
     @FXML
-    private Canvas canvas;
+    private MenuItem dijkstra;
 
     @FXML
-    private Button dijkstraButton;
+    private MenuItem floyd;
 
     @FXML
-    private Button floydWarshallButton;
+    private AnchorPane pane;
 
-    void init() {
-    	
-    	
-    }
-    
-    
-    
 }

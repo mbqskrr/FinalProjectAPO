@@ -6,11 +6,13 @@ public class Node {
 	private double x;
 	private double y;
 	private double r;
+	private int id;
 	
-	public Node(double newX, double newY) {
+	public Node(double newX, double newY,int newId) {
 		x = newX;
 		y = newY;
 		r = RADIUS;
+		id = newId;
 	}
 
 	public double getX() {
@@ -19,5 +21,8 @@ public class Node {
 	
 	public double getY() {
 		return y;
+	}
+	public int getId() {
+		return id;
 	}
 }

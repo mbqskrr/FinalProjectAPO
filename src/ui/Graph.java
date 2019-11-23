@@ -13,5 +13,7 @@ public class Graph {
 	public void add(double x,double u) {
 		nodes.add(new Node(x,u));
 	}
+	
+	
 
 }
