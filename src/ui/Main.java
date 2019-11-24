@@ -22,7 +22,7 @@ public class Main extends Application{
 		
 		Scene scene = new Scene(root);
 		
-		this.stage.setTitle("Grafos");
+		this.stage.setTitle("Graphs");
 		this.stage.setScene(scene);
 		this.stage.show();
 	}

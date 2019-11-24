@@ -6,9 +6,9 @@ public class Node {
 	private double x;
 	private double y;
 	private double r;
-	private int id;
+	private String id;
 	
-	public Node(double newX, double newY,int newId) {
+	public Node(double newX, double newY,String newId) {
 		x = newX;
 		y = newY;
 		r = RADIUS;
@@ -22,7 +22,7 @@ public class Node {
 	public double getY() {
 		return y;
 	}
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 }
