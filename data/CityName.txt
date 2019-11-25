@@ -1,9 +1,10 @@
+#This represent the city names wihtin the nodes 
 0 Sevilla
 1 Badajoz
 2 Cordoba
 3 Jaen
 4 Cáceres
-5 Ciudad Real
+5 Ciudad_Real
 6 Albacete
 7 Salamanca
 8 Toledo

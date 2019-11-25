@@ -25,4 +25,11 @@ public class Node {
 	public String getId() {
 		return id;
 	}
+	@Override
+	public String toString() {
+		return ""+getId()+" "+getX()+" "+getY();
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 }
