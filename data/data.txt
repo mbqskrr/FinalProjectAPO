@@ -3,10 +3,10 @@ Sevilla Badajoz 211.4
 Sevilla Córdoba 133.3 
 Sevilla Jaén 228 
 Badajoz Cáceres 90 
-Córdoba Ciudad Real 188.3 
+Córdoba Ciudad_Real 188.3 
 Jaén Albacete 254.1 
 Cáceres Salamanca 206.9 
-CiudadReal Toledo 112.9 
+Ciudad_Real Toledo 112.9 
 Albacete Cuenca 140.2 
 Salamanca Zamora 62.6 
 Salamanca Ávila 100.4 
