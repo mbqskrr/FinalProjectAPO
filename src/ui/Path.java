@@ -31,11 +31,6 @@ public class Path {
 	public String getN2() {
 		return n2;
 	}
-
-	public void setN2(String n2) {
-		this.n2 = n2;
-	}
-
 	public double getWeight() {
 		return weight;
 	}
