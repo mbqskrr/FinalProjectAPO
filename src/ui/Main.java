@@ -1,9 +1,13 @@
 package ui;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class Main extends Application{
@@ -22,9 +26,11 @@ public class Main extends Application{
 		
 		Scene scene = new Scene(root);
 		
-		this.stage.setTitle("Grafos");
+		this.stage.setTitle("Graphs");
 		this.stage.setScene(scene);
+		this.stage.setMaximized(true);
 		this.stage.show();
+
 	}
 	
 }

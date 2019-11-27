@@ -1,0 +1,22 @@
+#This represent the city names wihtin the nodes 
+0 Sevilla
+1 Badajoz
+2 Córdoba
+3 Jaén
+4 Cáceres
+5 Ciudad_Real
+6 Albacete
+7 Salamanca
+8 Toledo
+9 Cuenca
+10 Zamora
+11 Ávila
+12 Madrid
+13 Zaragoza
+14 Ourense
+15 León
+16 Segovia
+17 Burgos
+18 Lugo
+19 Valladolid
+20 Santiago
