@@ -1,31 +1,34 @@
 package ui;
-import javafx.event.ActionEvent;
+import java.util.Arrays;
+
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.scene.text.Text;
+
 
 public class FloydController {
 
     @FXML
-    private Label shown;
-
+    private Text t;
+	
 @FXML
-void initilize() {
+void initialize() {
+	t.setText("Test");
+	String tS = "";
 	double[][]matriz = GraphController.getMatrix();
-	shown.setText("Test");
+	System.out.println(matriz.length);
 	for (int x=0; x < matriz.length; x++) {
-		  System.out.print("|");
+		tS+=" "+x+"\t";
 		  for (int y=0; y < matriz[x].length; y++) {
 			int toChange = (int)matriz[x][y];
 			matriz[x][y]=toChange;
-			shown.setText(""+matriz[x][y]);
-		    if (y!=matriz[x].length-1) shown.setText("\t");
-		  }
-		  shown.setText("|");
+			tS +="|"+matriz[x][y]+"|"+"   ";
+	}	tS +=""+x;
+		  tS+="\n";
 	
+		
+		}
+		System.out.println(tS);
+	t.setText(tS);
 	}
-}
-@FXML
-void close(ActionEvent event) {
-	System.exit(1);
-}
+
 }
