@@ -5,6 +5,9 @@ import java.util.Arrays;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.Pane;
@@ -12,6 +15,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import model.AdjacencyMatrix;
+import model.GraphAlgorithms;
+import model.IGraph;
 
 public class GraphController {
 
@@ -35,12 +44,16 @@ public class GraphController {
     
     private Text t;
     
+    public static double[][]matrix;
+    
+    private IGraph<String> graph;
     @FXML
     void initialize() {
     	try {
 			g = new Graph();
 			g.loadCoordenates();
 			g.loadPaths();
+			g.merge();
 			int n= g.getNodes().size();
 			for (int i = 0; i < n; i++) {
 	    		node = g.getNodes().get(i);
@@ -121,4 +134,36 @@ public class GraphController {
     void runDjkstra(ActionEvent event) {
     	System.out.println("Test");
     }
+    @FXML
+    void runFloyd(ActionEvent event) throws Exception {
+    	graph =new AdjacencyMatrix<String>();
+    	for (int i = 0; i < g.getNodes().size(); i++) {
+    		graph.addVertex(g.getNodes().get(i).getId());	
+		}
+    	for (int i = 0; i < g.getPaths().size(); i++) {
+			String n1 =g.getPaths().get(i).getN1();
+			String n2 =g.getPaths().get(i).getN2();
+			double w = g.getPaths().get(i).getWeight();
+			graph.addEdge(n1, n2,w);			
+    	}
+    	double[][]w =GraphAlgorithms.floydWarshall(graph);
+    	matrix = w;
+    	start();
+   }
+
+    public static double[][] getMatrix() {
+		return matrix;
+	}
+    
+	public void start() throws Exception {
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Floyd.fxml"));
+        Parent root1 = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.setTitle("ABC");
+        stage.setScene(new Scene(root1));  
+        stage.show();
+
+	}
 }

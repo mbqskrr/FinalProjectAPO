@@ -40,7 +40,6 @@ public class Graph {
 		br.close();
 		fr.close();
 		loaded = true;
-		merge();
 		return loaded;
 	}
 	public boolean loadCoordenates() throws IOException {
