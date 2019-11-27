@@ -13,8 +13,8 @@
         <menus>
           <Menu mnemonicParsing="false" text="Algoritmos">
             <items>
-              <MenuItem fx:id="dijkstra" mnemonicParsing="false" text="Dijkstra" />
-                  <MenuItem fx:id="floyd" mnemonicParsing="false" text="FloydWarshall" />
+              <MenuItem fx:id="dijkstra" mnemonicParsing="false" onAction="#runDjkstra" text="Dijkstra" />
+                  <MenuItem fx:id="floyd" mnemonicParsing="false" onAction="#runFloyd" text="FloydWarshall" />
             </items>
           </Menu>
         </menus>
