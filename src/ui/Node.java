@@ -14,6 +14,12 @@ public class Node {
 		r = RADIUS;
 		id = newId;
 	}
+	
+	
+	public Node(double newX, double newY) {
+		x = newX;
+		y = newY;
+	}
 
 	public double getX() {
 		return x;
