@@ -7,11 +7,22 @@ import java.util.Map;
 
 public class AdjacencyList<T> implements IGraph<T>{
 	
+
+	 /**
+    * The length of the matrix when using the default Constructor.
+    */
+   private static final int DEFAULT_CAPACITY = 21;
+	
 	/**
 	 * Map with all the vertices within the graph.
 	 * Key of the map is the Vertex and Value is the position of the vertex in the adjacencyList
 	 */
 	private Map<T, Integer> vertices;	
+	
+	 /**
+     * A Map that uses any vertex as a key to access its corresponding index in the matrix.
+     */
+    private Map<Integer, T> verticesIndices;
 	
 	/**
 	 * A list for each Vertex within the graph which has a list with all its adjacent Vertices 
@@ -24,10 +35,15 @@ public class AdjacencyList<T> implements IGraph<T>{
 	private boolean isDirected;
 	
 	/**
+     * The associated matrix containing the weight of all edged between nodes in the graph.
+     */
+    private double[][] adjacencyMatrixWeight;
+	
+	/**
 	 * Basic constructor that is initialized with default values
 	 */
 	public AdjacencyList() {
-		initialize();
+		initialize(DEFAULT_CAPACITY);
 	}
 
 	/**
@@ -36,7 +52,7 @@ public class AdjacencyList<T> implements IGraph<T>{
 	 * @param id value to set "isDirected"
 	 */
 	public AdjacencyList(boolean id) {
-		initialize();
+		initialize(DEFAULT_CAPACITY);
 		isDirected = id;
 	}
 	
@@ -44,10 +60,12 @@ public class AdjacencyList<T> implements IGraph<T>{
 	 * Initializes all the data structures for this graph.
 	 * Set "isDirected" attribute in false
 	 */
-	private final void initialize() {
+	private final void initialize(int capacity) {
 		isDirected = false;
 		adjacencyLists = new ArrayList<List<T>>();
 		vertices = new HashMap<T, Integer>();
+		verticesIndices = new HashMap<>();
+		adjacencyMatrixWeight = new double[capacity][capacity];
 	}
 
 	@Override
@@ -62,6 +80,7 @@ public class AdjacencyList<T> implements IGraph<T>{
 			int index = adjacencyLists.size();
 			// Add the vertex to the map
 			vertices.put(node, index);
+			verticesIndices.put(index, node);
 			// Add the vertex empty list to the adjacencyLists
 			adjacencyLists.add(vList);
 			// Change the value to true indicating that it was possible to add the vertex
@@ -76,7 +95,6 @@ public class AdjacencyList<T> implements IGraph<T>{
 
 	@Override
 	public void addEdge(T A, T B) {
-		// TODO Auto-generated method stub
 		int ValueA = vertices.get(A);
 		int ValueB = vertices.get(B);
 		if(!isDirected) {
@@ -89,8 +107,25 @@ public class AdjacencyList<T> implements IGraph<T>{
 
 	@Override
 	public void addEdge(T A, T B, double l) {
-		// TODO Auto-generated method stub
-		
+		/*int x = vertices.get(A);//TODO: check pre-conditions
+        int y = vertices.get(B);
+        if (!isDirected) {
+        	adjacencyLists.get(x).add(B);
+			adjacencyLists.get(y).add(A);
+            adjacencyMatrixWeight[x][y] = l;
+            adjacencyMatrixWeight[y][x] = l;
+        } else {
+            adjacencyMatrixWeight[x][y] = l;
+            adjacencyLists.get(x).add(B);
+        }*/
+		Edge<T> edge = new Edge<T>(A, B, l);
+		AdjVertex<T> from = new AdjVertex<T>(A);
+		from.getAdjList().add(edge);
+		if (!isDirected()) {
+			edge = new Edge<T>(A, B, l);
+			AdjVertex<T> to = new AdjVertex<T>(B);
+			to.getAdjList().add(edge);
+		}
 	}
 
 	@SuppressWarnings("unlikely-arg-type")
@@ -122,8 +157,13 @@ public class AdjacencyList<T> implements IGraph<T>{
 
 	@Override
 	public List<T> vertexAdjacent(T node) {
-		// TODO Auto-generated method stub
-		return null;
+		List<T> neigh = new ArrayList<>();
+		AdjVertex<T> aV = new AdjVertex<T>(node);
+		List<Edge<T>> adj = aV.getAdjList();
+		for (int i = 0; i < adj.size(); i++) {
+			neigh.add(adj.get(i).getDestination());
+		}
+		return neigh;
 	}
 
 	@Override
@@ -145,8 +185,16 @@ public class AdjacencyList<T> implements IGraph<T>{
 
 	@Override
 	public double[][] weightMatrix() {
-		// TODO Auto-generated method stub
-		return null;
+		for (int i = 0; i < adjacencyLists.size(); i++) {
+			for (int j = 0; j < adjacencyLists.size(); j++) {
+				if (i != j) {
+					if (adjacencyMatrixWeight[i][j] == 0) {
+						adjacencyMatrixWeight[i][j] = Double.MAX_VALUE;
+					}
+				}
+			}
+		}
+		return adjacencyMatrixWeight;
 	}
 
 	@Override
@@ -156,8 +204,7 @@ public class AdjacencyList<T> implements IGraph<T>{
 
 	@Override
 	public int getVertexSize() {
-		// TODO Auto-generated method stub
-		return 0;
+		return vertices.size();
 	}
 
 	@Override
@@ -187,14 +234,19 @@ public class AdjacencyList<T> implements IGraph<T>{
 
 	@Override
 	public T search(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		return verticesIndices.get(index);
 	}
 
 	@Override
 	public List<Edge<T>> getEdges() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Edge<T>> edges = new ArrayList<>();
+		for (int i = 0; i < vertices.size(); i++) {
+			AdjVertex<T> v = new AdjVertex<T>(verticesIndices.get(i));
+			for (int j = 0; j < v.getAdjList().size(); j++) {
+				edges.add(v.getAdjList().get(j));
+			}
+		}
+		return edges;
 	}
 
 }
