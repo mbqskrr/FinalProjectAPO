@@ -72,7 +72,7 @@ public class AdjacencyList<T> implements IGraph<T>{
 	public boolean addVertex(T node) {
 		boolean added = false;
 		// Check if the vertex is not on the map already
-		if(!searchVertex(node)) {
+		if(!search(node)) {
 			@SuppressWarnings("unchecked")
 			// Create a new empty list for that vertex
 			List<T> vList = (List<T>) new ArrayList<Object>();
@@ -89,10 +89,6 @@ public class AdjacencyList<T> implements IGraph<T>{
 		return added;
 	}
 
-	private boolean searchVertex(T node) {
-		return vertices.containsValue(node);
-	}
-
 	@Override
 	public void addEdge(T A, T B) {
 		int ValueA = vertices.get(A);
@@ -107,9 +103,9 @@ public class AdjacencyList<T> implements IGraph<T>{
 
 	@Override
 	public void addEdge(T A, T B, double l) {
-		/*int x = vertices.get(A);//TODO: check pre-conditions
+		int x = vertices.get(A);//TODO: check pre-conditions
         int y = vertices.get(B);
-        if (!isDirected) {
+        /*if (!isDirected) {
         	adjacencyLists.get(x).add(B);
 			adjacencyLists.get(y).add(A);
             adjacencyMatrixWeight[x][y] = l;
@@ -125,6 +121,10 @@ public class AdjacencyList<T> implements IGraph<T>{
 			edge = new Edge<T>(A, B, l);
 			AdjVertex<T> to = new AdjVertex<T>(B);
 			to.getAdjList().add(edge);
+			adjacencyLists.get(x).add(B);
+			adjacencyLists.get(y).add(A);
+            adjacencyMatrixWeight[x][y] = l;
+            adjacencyMatrixWeight[y][x] = l;
 		}
 	}
 
@@ -187,8 +187,8 @@ public class AdjacencyList<T> implements IGraph<T>{
 	public double[][] weightMatrix() {
 		for (int i = 0; i < adjacencyLists.size(); i++) {
 			for (int j = 0; j < adjacencyLists.size(); j++) {
-				if (i != j) {
-					if (adjacencyMatrixWeight[i][j] == 0) {
+				if (adjacencyMatrixWeight[i][j] == 0 ) {
+					if (i != j) {
 						adjacencyMatrixWeight[i][j] = Double.MAX_VALUE;
 					}
 				}
@@ -215,7 +215,6 @@ public class AdjacencyList<T> implements IGraph<T>{
 
 	@Override
 	public int getIndex(T vertex) {
-		// TODO Auto-generated method stub
 		return vertices.get(vertex);
 	}
 
