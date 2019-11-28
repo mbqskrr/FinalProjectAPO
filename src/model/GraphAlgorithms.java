@@ -10,7 +10,7 @@ public class GraphAlgorithms<T, V> {
 	
 	private static double[] cost;
 	private static boolean[] F;
-	private static Object[] path;
+	private static int[] path;
 	
 	/**
 	 * Performs a breadth-first search to traverse a graph
@@ -74,10 +74,11 @@ public class GraphAlgorithms<T, V> {
 		int n = g.getVertexSize();
 		cost = new double[n];
 		F = new boolean[n];
-		path = new Object[n];
+		path = new int[n];
 		for (int i = 0; i < n; i++) {
 			F[i] = false;
 			cost[i] = weights[index][i];
+			path[i] = index;
 		}
 		F[index] = true;
 		cost[index] = 0;
@@ -88,7 +89,7 @@ public class GraphAlgorithms<T, V> {
 				if(!F[i]) {
 					if (cost[v] + weights[v][i] < cost[i]) {
 						cost[i] = (cost[v] + weights[v][i]);
-						path[i] = g.search(v);
+						path[i] = v;
 					}
 				}
 			}
@@ -97,6 +98,7 @@ public class GraphAlgorithms<T, V> {
 	
 	/**
 	 * select unmarked vertex shorter distance
+	 * @param n number of vertices
 	 * @return v the minimum cost in the array
 	 */
 	private static int minimum(int n) {
@@ -221,7 +223,7 @@ public class GraphAlgorithms<T, V> {
 		return cost;
 	}
 	
-	public static Object[] getPath() {
+	public static int[] getPath() {
 		return path;
 	}
 

@@ -119,6 +119,18 @@ class GraphAlgorithmsTest {
 	}
 	
 	@Test
+	void setUpScenary5() {
+		graph = new AdjacencyMatrix<String>();
+		graph.addVertex("A");
+		graph.addVertex("B");
+		graph.addVertex("C");
+		
+		graph.addEdge("A", "B", 14);
+		graph.addEdge("A", "C", 30);
+		graph.addEdge("B", "C", 100);
+	}
+	
+	@Test
 	void floydWarshallTest() {
 		setUpScenary();
 		GraphAlgorithms.floydWarshall(graph);
@@ -144,7 +156,7 @@ class GraphAlgorithmsTest {
 		assertEquals(3, GraphAlgorithms.getCost()[1]);
 		assertEquals(10, GraphAlgorithms.getCost()[0]);
 		
-		assertEquals("A", GraphAlgorithms.getPath()[4]);
+		//assertEquals("A", GraphAlgorithms.getPath()[0]);
 		
 		setUpScenary4();
 		GraphAlgorithms.dijkstra("Dallas", graph);
@@ -153,6 +165,13 @@ class GraphAlgorithmsTest {
 		assertEquals(1500, GraphAlgorithms.getCost()[3]);
 		GraphAlgorithms.dijkstra("Chicago", graph);
 		assertEquals(1400, GraphAlgorithms.getCost()[6]);
+		
+		setUpScenary5();
+		GraphAlgorithms.dijkstra("C", graph);
+		assertEquals(30, GraphAlgorithms.getCost()[0]);
+		assertEquals(44, GraphAlgorithms.getCost()[1]);
+		assertEquals(0, GraphAlgorithms.getCost()[2]);
+		assertEquals(0, GraphAlgorithms.getPath()[1]);
 	}
 	
 	@Test
