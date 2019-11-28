@@ -1,6 +1,9 @@
 package ui;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Arrays;
 
 import javafx.event.ActionEvent;
@@ -37,13 +40,13 @@ public class GraphController {
     @FXML
     private Label coordenates;
     
-    private static Graph g;
+    private  Graph g;
     
-    private static Node node;
+    private  Node node;
     
-    private static Circle c;
+    private  Circle c;
     
-    private static Text t;
+    private  Text t;
     
     public static double[][]matrix;
     
@@ -141,21 +144,22 @@ public class GraphController {
 			String n1 =g.getPaths().get(i).getN1();
 			String n2 =g.getPaths().get(i).getN2();
 			double w = g.getPaths().get(i).getWeight();
+			System.out.println("Iteracion"+i+" Nodo 1:"+n1+" Nodo 2: "+n2+" Peso: "+w);
 			graph.addEdge(n1, n2,w);			
     	}
-    	GraphAlgorithms.dijkstra(g.getNodes().get(0).getId(), graph);
+    	GraphAlgorithms.dijkstra("Santiago", graph);
     	printGraphMatrix(graph);
     }
     private void printGraphMatrix(IGraph<String> matriz) {
     	System.out.println(graph.getEdges());
-    	String[] data;
+    	String[] data=new String[graph.getVertexSize()];;
     	for (int i = 0; i < graph.getVertexSize(); i++) {
-    		System.out.println("Dato en la "+i+" "+graph.getEdges().get(i));
     		String toAdd = graph.getEdges().get(i).toString();
-    		data = new String[graph.getVertexSize()];
+    		System.out.println("Dato en la "+i+" "+toAdd);
     		data[i]=toAdd;
 		}
     	try {
+    		save(data);
 			startDijkstra();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -163,19 +167,20 @@ public class GraphController {
 		
 	}
 
-		public static void dibujarNodos(Pane newPane) {
-
-			int n= g.getNodes().size();
-			for (int i = 0; i < n; i++) {
-	    		node = g.getNodes().get(i);
-	    		double x = node.getX();
-	    		double y = node.getY();
-	    		t = new Text(x-12, y-12, g.getNodes().get(i).getId());
-	    		c = new Circle(x, y, 10,Color.RED);
-	    		newPane.getChildren().add(c);
-	    		newPane.getChildren().add(t);  
-    		}
-	}
+		private void save(String[] data) {
+			try {
+				String save = "";
+				for (int i = 0; i < data.length; i++) {
+					save +=data[i]+"\n";
+				}
+				PrintWriter pw = new PrintWriter(new File("data/DijkstraCoords.txt"));
+				pw.write(save);
+				pw.close();
+			} catch (FileNotFoundException e) {
+				
+			}
+			
+		}
 
 	@FXML
     void runFloyd(ActionEvent event) throws Exception {

@@ -63,7 +63,7 @@ public class GraphAlgorithms<T, V> {
 	}
 	
 	/**
-	 *This method allows to use a Dijkstra algorithm by the matrix matrix
+	 *This method allows to use a Dijkstra algorithm by the matrix
 	 * @param origin The starting node
 	 * @param g the graph
 	 */
