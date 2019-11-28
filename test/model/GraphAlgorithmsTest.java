@@ -144,6 +144,8 @@ class GraphAlgorithmsTest {
 		assertEquals(3, GraphAlgorithms.getCost()[1]);
 		assertEquals(10, GraphAlgorithms.getCost()[0]);
 		
+		assertEquals("A", GraphAlgorithms.getPath()[4]);
+		
 		setUpScenary4();
 		GraphAlgorithms.dijkstra("Dallas", graph);
 		assertEquals(1500, GraphAlgorithms.getCost()[0]);
