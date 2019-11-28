@@ -78,20 +78,10 @@ public interface IGraph<T> {
 	
 	public boolean isWeighted();
 
-	/**
-	 * Returns the index given its element
-	 * @param vertex the element
-	 * @return the index of the element
-	 */
 	public int getIndex(T vertex);
 	
 	public boolean search(T A);
-
-	/**
-	 * Returns the elements given its index
-	 * @param index the index of the element
-	 * @return the element of its index
-	 */
+	
 	public T search(int index);
 	
 	public List<Edge<T>> getEdges();

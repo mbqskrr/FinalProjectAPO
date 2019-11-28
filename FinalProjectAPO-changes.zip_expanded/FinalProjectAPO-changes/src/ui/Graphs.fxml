@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.GraphController">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="Algoritmos">
+            <items>
+              <MenuItem fx:id="dijkstra" mnemonicParsing="false" onAction="#runDjkstra" text="Dijkstra" />
+                  <MenuItem fx:id="floyd" mnemonicParsing="false" onAction="#runFloyd" text="FloydWarshall" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <center>
+      <Pane fx:id="pane" prefHeight="600.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+         <children>
+            <Pane fx:id="newPane" prefHeight="200.0" prefWidth="200.0" />
+         </children></Pane>
+   </center>
+   <bottom>
+      <Label fx:id="Coordenates" text="Label" BorderPane.alignment="CENTER" />
+   </bottom>
+</BorderPane>
