@@ -17,13 +17,9 @@ public class Path {
 		this.n1 = n1;
 		this.n2 = n2;
 	}
-	
-	
-
 	public String getN1() {
 		return n1;
 	}
-
 	public void setN1(String n1) {
 		this.n1 = n1;
 	}

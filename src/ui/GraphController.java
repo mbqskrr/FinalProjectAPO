@@ -19,6 +19,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.AdjacencyMatrix;
+import model.Edge;
 import model.GraphAlgorithms;
 import model.IGraph;
 
@@ -36,13 +37,13 @@ public class GraphController {
     @FXML
     private Label coordenates;
     
-    private Graph g;
+    private static Graph g;
     
-    private Node node;
+    private static Node node;
     
-    private Circle c;
+    private static Circle c;
     
-    private Text t;
+    private static Text t;
     
     public static double[][]matrix;
     
@@ -132,9 +133,51 @@ public class GraphController {
 	}
     @FXML
     void runDjkstra(ActionEvent event) {
-    	System.out.println("Test");
+    	graph =new AdjacencyMatrix<String>();
+    	for (int i = 0; i < g.getNodes().size(); i++) {
+    		graph.addVertex(g.getNodes().get(i).getId());	
+		}
+    	for (int i = 0; i < g.getPaths().size(); i++) {
+			String n1 =g.getPaths().get(i).getN1();
+			String n2 =g.getPaths().get(i).getN2();
+			double w = g.getPaths().get(i).getWeight();
+			graph.addEdge(n1, n2,w);			
+    	}
+    	GraphAlgorithms.dijkstra(g.getNodes().get(0).getId(), graph);
+    	printGraphMatrix(graph);
     }
-    @FXML
+    private void printGraphMatrix(IGraph<String> matriz) {
+    	System.out.println(graph.getEdges());
+    	String[] data;
+    	for (int i = 0; i < graph.getVertexSize(); i++) {
+    		System.out.println("Dato en la "+i+" "+graph.getEdges().get(i));
+    		String toAdd = graph.getEdges().get(i).toString();
+    		data = new String[graph.getVertexSize()];
+    		data[i]=toAdd;
+		}
+    	try {
+			startDijkstra();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+		public static void dibujarNodos(Pane newPane) {
+
+			int n= g.getNodes().size();
+			for (int i = 0; i < n; i++) {
+	    		node = g.getNodes().get(i);
+	    		double x = node.getX();
+	    		double y = node.getY();
+	    		t = new Text(x-12, y-12, g.getNodes().get(i).getId());
+	    		c = new Circle(x, y, 10,Color.RED);
+	    		newPane.getChildren().add(c);
+	    		newPane.getChildren().add(t);  
+    		}
+	}
+
+	@FXML
     void runFloyd(ActionEvent event) throws Exception {
     	graph =new AdjacencyMatrix<String>();
     	for (int i = 0; i < g.getNodes().size(); i++) {
@@ -148,20 +191,33 @@ public class GraphController {
     	}
     	double[][]w =GraphAlgorithms.floydWarshall(graph);
     	matrix = w;
-    	start();
+    	startFloyd();
    }
 
     public static double[][] getMatrix() {
 		return matrix;
 	}
-    
-	public void start() throws Exception {
+	public void startDijkstra() throws Exception {
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Dijkstra.fxml"));
+        Parent root1 = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.setTitle("Dijkstra");
+        stage.setScene(new Scene(root1));
+        stage.setMaximized(true);
+        stage.show();
+
+	}
+	public void startFloyd() throws Exception {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Floyd.fxml"));
         Parent root1 = (Parent) fxmlLoader.load();
         Stage stage = new Stage();
         stage.setTitle("Floyd");
-        stage.setScene(new Scene(root1));  
+        stage.setScene(new Scene(root1));
+        stage.setResizable(false);
+        stage.setHeight(500);
+        stage.setWidth(1000);
         stage.show();
 
 	}
+	
 }

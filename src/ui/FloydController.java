@@ -1,6 +1,4 @@
 package ui;
-import java.util.Arrays;
-
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
 
@@ -15,7 +13,6 @@ void initialize() {
 	t.setText("Test");
 	String tS = "";
 	double[][]matriz = GraphController.getMatrix();
-	System.out.println(matriz.length);
 	for (int x=0; x < matriz.length; x++) {
 		tS+=" "+x+"\t";
 		  for (int y=0; y < matriz[x].length; y++) {
@@ -27,7 +24,6 @@ void initialize() {
 	
 		
 		}
-		System.out.println(tS);
 	t.setText(tS);
 	}
 

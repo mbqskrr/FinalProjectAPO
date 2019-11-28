@@ -79,11 +79,9 @@ public class GraphAlgorithms<T, V> {
 		}
 		F[index] = true;
 		cost[index] = 0;
-		//steps to mark the n-1 vertices
 		for (int k = 0; k < n; k++) {
 			int v = minimum(n);
 			F[v] = true;
-			//update distance of unmarked vertices
 			for (int i = 0; i < n; i++) {
 				if(!F[i]) {
 					if (cost[v] + weights[v][i] < cost[i]) {

@@ -21,7 +21,10 @@
       </MenuBar>
    </top>
    <center>
-      <Pane fx:id="pane" prefHeight="600.0" prefWidth="800.0" BorderPane.alignment="CENTER" />
+      <Pane fx:id="pane" prefHeight="600.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+         <children>
+            <Pane fx:id="newPane" prefHeight="200.0" prefWidth="200.0" />
+         </children></Pane>
    </center>
    <bottom>
       <Label fx:id="Coordenates" text="Label" BorderPane.alignment="CENTER" />

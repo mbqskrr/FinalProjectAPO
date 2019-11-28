@@ -39,7 +39,7 @@ public class Edge<T> implements Comparable<Edge<T>> {
 	
 	@Override
 	public String toString() {
-		return ""+source+" - "+destination+", "+weight;
+		return ""+source+" "+destination+" "+weight;
 	}
 
 }
