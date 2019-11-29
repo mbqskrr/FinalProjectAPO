@@ -1,19 +1,18 @@
 package model;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-class GraphAlgorithmsTest {
-	
-	private IGraph<String> graph;
+class GraphAlgorithmsTest1 {
+
+private IGraph<String> graph;
 	
 	@Test
 	void setUpScenary() {
-		graph = new AdjacencyMatrix<String>();
+		graph = new AdjacencyList<String>();
 		graph.addVertex("Cali");
 		graph.addVertex("Yumbo");
 		graph.addVertex("Jamundi");
@@ -30,7 +29,7 @@ class GraphAlgorithmsTest {
 	
 	@Test
 	void setUpScenary1() {
-		graph = new AdjacencyMatrix<String>();
+		graph = new AdjacencyList<String>();
 		graph.addVertex("A");
 		graph.addVertex("B");
 		graph.addVertex("C");
@@ -47,7 +46,7 @@ class GraphAlgorithmsTest {
 	
 	@Test 
 	void setUpScenary2(){
-		graph = new AdjacencyMatrix<String>();
+		graph = new AdjacencyList<String>();
 		graph.addVertex("A");
 		graph.addVertex("B");
 		graph.addVertex("C");
@@ -71,7 +70,7 @@ class GraphAlgorithmsTest {
 	
 	@Test
 	void setUpScenary3() {
-		graph = new AdjacencyMatrix<String>();
+		graph = new AdjacencyList<String>();
 		graph.addVertex("A");
 		graph.addVertex("B");
 		graph.addVertex("C");
@@ -95,7 +94,7 @@ class GraphAlgorithmsTest {
 	
 	@Test
 	void setUpScenary4() {
-		graph = new AdjacencyMatrix<String>();
+		graph = new AdjacencyList<String>();
 		graph.addVertex("Boston");
 		graph.addVertex("Nueva York");
 		graph.addVertex("Chicago");
@@ -120,7 +119,7 @@ class GraphAlgorithmsTest {
 	
 	@Test
 	void setUpScenary5() {
-		graph = new AdjacencyMatrix<String>();
+		graph = new AdjacencyList<String>();
 		graph.addVertex("A");
 		graph.addVertex("B");
 		graph.addVertex("C");
@@ -149,7 +148,7 @@ class GraphAlgorithmsTest {
 	@Test
 	void dijkstraTest() {
 		setUpScenary1();
-		GraphAlgorithms.dijkstra("D", graph, 4);
+		GraphAlgorithms.dijkstra("D", graph, 0);
 		assertEquals(7, GraphAlgorithms.getCost()[4]);
 		assertEquals(0, GraphAlgorithms.getCost()[3]);
 		assertEquals(7, GraphAlgorithms.getCost()[2]);
@@ -157,9 +156,6 @@ class GraphAlgorithmsTest {
 		assertEquals(10, GraphAlgorithms.getCost()[0]);
 		
 		assertEquals(3, GraphAlgorithms.getPath()[1]);
-		
-		assertEquals(3, GraphAlgorithms.getChoice().get(0));
-		assertEquals(1, GraphAlgorithms.getChoice().get(1));
 		
 		setUpScenary4();
 		GraphAlgorithms.dijkstra("Dallas", graph, 0);
@@ -191,7 +187,7 @@ class GraphAlgorithmsTest {
 		assertEquals("I", GraphAlgorithms.bfs(graph, "A").get(8));
 		assertEquals("J", GraphAlgorithms.bfs(graph, "A").get(9));
 		
-		IGraph<Integer> g = new AdjacencyMatrix<Integer>();
+		IGraph<Integer> g = new AdjacencyList<Integer>();
 		g.addVertex(1);
 		g.addVertex(2);
 		g.addVertex(3);
@@ -244,7 +240,7 @@ class GraphAlgorithmsTest {
 		assertEquals("F", GraphAlgorithms.dfs(graph, "A").get(8));
 		assertEquals("E", GraphAlgorithms.dfs(graph, "A").get(9));
 		
-		IGraph<Integer> g = new AdjacencyMatrix<Integer>();
+		IGraph<Integer> g = new AdjacencyList<Integer>();
 		g.addVertex(1);
 		g.addVertex(2);
 		g.addVertex(3);
@@ -260,7 +256,7 @@ class GraphAlgorithmsTest {
 		assertEquals(2, GraphAlgorithms.dfs(g, 1).get(3));
 		assertEquals(4, GraphAlgorithms.dfs(g, 1).get(4));
 		
-		IGraph<Integer> gr = new AdjacencyMatrix<Integer>();
+		IGraph<Integer> gr = new AdjacencyList<Integer>();
 		gr.addVertex(1);
 		gr.addVertex(2);
 		gr.addVertex(3);
@@ -280,7 +276,7 @@ class GraphAlgorithmsTest {
 	void primTest() {
 		setUpScenary3();
 		assertEquals(39, GraphAlgorithms.prim("A", graph));
-		IGraph<Integer> g = new AdjacencyMatrix<Integer>();
+		IGraph<Integer> g = new AdjacencyList<Integer>();
 		
 		g.addVertex(1);
 		g.addVertex(2);
@@ -313,7 +309,7 @@ class GraphAlgorithmsTest {
 		g.addEdge(9, 10, 7);
 		assertEquals(45, GraphAlgorithms.prim(1, g));
 		
-		IGraph<Integer> simpleG = new AdjacencyMatrix<Integer>();
+		IGraph<Integer> simpleG = new AdjacencyList<Integer>();
 		simpleG.addVertex(1);
 		simpleG.addVertex(2);
 		simpleG.addVertex(3);
@@ -375,7 +371,7 @@ class GraphAlgorithmsTest {
 		assertEquals(totalW, 39);
 		
 		
-		IGraph<Integer> simpleG = new AdjacencyMatrix<Integer>();
+		IGraph<Integer> simpleG = new AdjacencyList<Integer>();
 		simpleG.addVertex(1);
 		simpleG.addVertex(2);
 		simpleG.addVertex(3);

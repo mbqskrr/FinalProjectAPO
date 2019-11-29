@@ -6,11 +6,12 @@ import java.util.List;
 
 import model.IGraph;
 
-public class GraphAlgorithms<T, V> {
+public class GraphAlgorithms<T> {
 	
 	private static double[] cost;
 	private static boolean[] F;
 	private static int[] path;
+	public static List<Integer> choice;
 	
 	/**
 	 * Performs a breadth-first search to traverse a graph
@@ -67,14 +68,17 @@ public class GraphAlgorithms<T, V> {
 	 *This method allows to use a Dijkstra algorithm by the matrix matrix
 	 * @param origin The starting node
 	 * @param g the graph
+	 * @param c 
 	 */
-	public static<T> void dijkstra(T origin, IGraph<T> g) {
+	public static<T> void dijkstra(T origin, IGraph<T> g, int c) {
 		double[][] weights = g.weightMatrix(); 
 		int index = g.getIndex(origin); 
 		int n = g.getVertexSize();
 		cost = new double[n];
 		F = new boolean[n];
 		path = new int[n];
+		choice = new ArrayList<Integer>();
+		choice.add(g.getIndex(origin));
 		for (int i = 0; i < n; i++) {
 			F[i] = false;
 			cost[i] = weights[index][i];
@@ -90,6 +94,9 @@ public class GraphAlgorithms<T, V> {
 					if (cost[v] + weights[v][i] < cost[i]) {
 						cost[i] = (cost[v] + weights[v][i]);
 						path[i] = v;
+						if (i == c) {
+							choice.add(v);
+						}
 					}
 				}
 			}
@@ -227,5 +234,8 @@ public class GraphAlgorithms<T, V> {
 		return path;
 	}
 
+	public static List<Integer> getChoice() {
+		return choice;
+	}
 	
 }

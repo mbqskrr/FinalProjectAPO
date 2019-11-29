@@ -118,6 +118,12 @@ private AdjacencyList<String> g;
 		assertEquals(5, g.getVertexSize());
 		assertNotEquals(4, g.getVertexSize());
 	}
+	
+	@Test
+	void getEdgesTest() {
+		setUpScenary2();
+		assertEquals(15, g.getEdges().get(0));
+	}
 
 
 }

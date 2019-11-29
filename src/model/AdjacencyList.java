@@ -220,7 +220,7 @@ public class AdjacencyList<T> implements IGraph<T>{
 
 	@Override
 	public boolean search(T A) {
-		return vertices.containsValue(A);
+		return verticesIndices.containsValue(A);
 	}
 
 	public Map<T, Integer> getVertices() {

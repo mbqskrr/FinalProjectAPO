@@ -143,7 +143,7 @@ public class GraphController {
 			double w = g.getPaths().get(i).getWeight();
 			graph.addEdge(n1, n2,w);			
     	}
-    	GraphAlgorithms.dijkstra(g.getNodes().get(0).getId(), graph);
+    	GraphAlgorithms.dijkstra(g.getNodes().get(0).getId(), graph, g.getNodes().size()-1);
     	printGraphMatrix(graph);
     }
     private void printGraphMatrix(IGraph<String> matriz) {
